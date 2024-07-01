@@ -35,6 +35,13 @@ class ProfilDatamapper extends CoreDatamapper {
     const result = await this.query(query, values);
     return result.rows[0];
   }
+
+  static async deleteById(id) {
+    const query = `DELETE FROM ${this.tableName} WHERE id = $1 RETURNING *`;
+    const values = [id];
+    const result = await this.query(query, values);
+    return result.rows[0];
+  }
 }
 
 export default ProfilDatamapper;
