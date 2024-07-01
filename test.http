@@ -1,1 +1,33 @@
 GET localhost:3000/posts
+
+###
+
+POST http://localhost:3000/posts
+Content-Type: application/json
+
+{
+  "title": "test",
+  "platform": "ps5",
+  "description": "test desc",
+  "schedule_start": "2021-09-01T00:00:00.000Z",
+  "schedule_end": "2021-09-02T00:00:00.000Z",
+  "status": true,
+  "user_id": 1,
+  "game_id": 3
+}
+
+###
+
+PATCH http://localhost:3000/posts/1
+Content-Type: application/json
+
+{
+  "title": "test3",
+  "platform": "ps4",
+  "description": "test desc",
+  "schedule_start": "2021-09-01T00:00:00.000Z",
+  "schedule_end": "2021-09-02T00:00:00.000Z",
+  "status": true,
+  "user_id": 1,
+  "game_id": 3
+}

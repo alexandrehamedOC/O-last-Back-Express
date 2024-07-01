@@ -8,4 +8,8 @@ router
 .get('/posts/:id', PostController.showOne)
 .get('/posts/user/:id', PostController.showPostsByUser);
 
+router.post('/posts', PostController.createPost);
+
 router.delete('/posts/:id', PostController.deletePost);
+
+router.patch('/posts/:id', PostController.updatePost);
