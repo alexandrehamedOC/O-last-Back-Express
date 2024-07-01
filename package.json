@@ -6,6 +6,7 @@
   "main": "index.js",
   "scripts": {
     "dev": "ENV=dev node --watch index.js",
+    "db:seeding": "psql -U olast -d olast -f ./app/data/seeding.sql",
     "docker:image": "docker build -t o-last-back .",
     "docker:run": "docker run -p 3000:3000 o-last-back"
   },
