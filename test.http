@@ -1,12 +1,20 @@
-GET localhost:3000/posts
+@endpoint=http://localhost:3000/api/v1
+
+GET {{endpoint}}/posts
+
+###
+GET {{endpoint}}/posts/1
+
+###
+GET {{endpoint}}/posts/user/1
 
 ###
 
-POST http://localhost:3000/posts
+POST {{endpoint}}/posts
 Content-Type: application/json
 
 {
-  "title": "test",
+  "title": "test ded",
   "platform": "ps5",
   "description": "test desc",
   "schedule_start": "2021-09-01T00:00:00.000Z",
@@ -18,7 +26,7 @@ Content-Type: application/json
 
 ###
 
-PATCH http://localhost:3000/posts/1
+PATCH {{endpoint}}/posts/1
 Content-Type: application/json
 
 {
