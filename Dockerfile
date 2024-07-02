@@ -1,5 +1,7 @@
-# Utilise une image Node.js officielle comme image de base
-FROM node:lts-alpine3.16
+# Dockerfile de l'application Node.js
+
+# Utilisation d'une image Node.js adaptée à votre architecture ARM
+FROM node:lts-alpine
 
 # Définit le répertoire de travail dans le conteneur
 WORKDIR /app
@@ -17,4 +19,4 @@ COPY . .
 EXPOSE 3000
 
 # Définit la commande pour démarrer l'application
-CMD ["node", "index.js"]
+CMD ["npm", "start"]

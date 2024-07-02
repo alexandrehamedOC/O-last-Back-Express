@@ -1,5 +1,5 @@
 GET http://localhost:3000/api/v1/games
 ###
 
-GET http://localhost:3000/api/v1/rates
+GET http://localhost:3000/api/v1/posts/1
 
