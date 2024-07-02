@@ -8,6 +8,7 @@
     "dev": "ENV=dev node --watch index.js",
     "db:seeding": "psql -U olast -d olast -f ./app/data/seeding.sql",
     "db:seeding:jb": "psql -p 5433 -f ./app/data/seeding.sql",
+    "db:seeding:al": "psql -U spedata -d olast -f ./app/data/seeding.sql",
     "docker:image": "docker build -t o-last-back .",
     "docker:run": "docker run -p 3000:3000 o-last-back"
   },

@@ -1,7 +1,7 @@
-import { Router } from 'express';
+import express from 'express';
 import userRouter from './user.router.js'
 
-export const router = Router();
+const router = express.Router();
 
 router.use((_, res, next) => {
     res.returnFormat = 'json';
@@ -13,6 +13,6 @@ router.use((_, res, next) => {
    * @route  GET /api/v1/users
    * 
    */
-  router.use('/users', userRouter);
+  router.use('/api/v1/users', userRouter);
 
   export default router;

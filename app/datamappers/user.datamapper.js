@@ -1,7 +1,7 @@
-import CoreController from './core.datamapper';
+import CoreDatamapper from './core.datamapper.js';
 
-export default class UserDatamapper extends CoreController {
+export default class UserDatamapper extends CoreDatamapper {
 
-    static tableName = 'User'
+    static tableName = 'users';
 
 }

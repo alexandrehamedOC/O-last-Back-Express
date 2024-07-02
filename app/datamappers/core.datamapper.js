@@ -18,7 +18,7 @@ export default class CoreDatamapper {
     const { rows } = result;
     return rows[0];
   }
-  async create(input) {
+  static async create(input) {
     const columns = Object.keys(input).map((column) => `"${column}"`);
     const placeholders = Object.keys(input).map((_, index) => `$${index + 1}`); // 0 => $1, 1 => $2
     const values = Object.values(input);
@@ -33,7 +33,7 @@ export default class CoreDatamapper {
     */
 
     const result = await this.client.query(`
-      INSERT INTO "${this.constructor.tableName}"
+      INSERT INTO "${this.tableName}"
       (${columns})
       VALUES (${placeholders})
       RETURNING *
@@ -41,7 +41,7 @@ export default class CoreDatamapper {
     return result.rows[0];
   }
 
-  async update(id, input) {
+  static async update(id, input) {
     const fieldPlaceholders = Object.keys(input).map((column, index) => `"${column}" = $${index + 1}`);
     const values = Object.values(input);
     /*
@@ -49,7 +49,7 @@ export default class CoreDatamapper {
     values ==> ['Angular','/angular']
     */
     const result = await this.client.query(`
-      UPDATE ${this.constructor.tableName} SET
+      UPDATE ${this.tableName} SET
         ${fieldPlaceholders},
         updated_at = now()
       WHERE id = $${fieldPlaceholders.length + 1}
@@ -65,8 +65,8 @@ export default class CoreDatamapper {
     return result.rows[0];
   }
 
-  async delete(id) {
-    const result = await this.client.query(`DELETE FROM ${this.constructor.tableName} WHERE id = $1`, [id]);
+  static async delete(id) {
+    const result = await this.client.query(`DELETE FROM ${this.tableName} WHERE id = $1`, [id]);
     // On transforme 0 ou 1 en false ou true
     // Donc on s'assure que la méthode renvoi une valeur de type boolean
     return !!result.rowCount;

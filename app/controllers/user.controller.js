@@ -1,9 +1,8 @@
-import UserDatamapper from "../datamappers/user.datamapper";
-import CoreController from "./core.controller";
+import UserDatamapper from "../datamappers/index.datamapper.js";
+import CoreController from "./core.controller.js";
 
 export default class UserController extends CoreController{
-    static entityName = 'User';
+    static entityName = 'users';
     static mainDatamapper = UserDatamapper;
 
-    
 }

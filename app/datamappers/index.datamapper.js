@@ -7,9 +7,5 @@ UserDatamapper.init({client});
 
 /**Inject client */
 
-export default {
     /**export datamapper here */
-UserDatamapper,
-
-
-};
+export default UserDatamapper;
