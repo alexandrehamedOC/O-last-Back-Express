@@ -10,7 +10,7 @@ export default class PostDatamapper extends CoreDatamapper {
         JOIN "user" ON "${this.tableName}"."user_id" = "user"."id"
         WHERE "user"."id" = $1
         `,
-      [userId]
+      [userId],
     );
     const { rows } = result;
     return rows;
