@@ -28,18 +28,24 @@ export default class CoreDatamapper {
     const result = await this.client.query(
       `
 <<<<<<< HEAD
+<<<<<<< HEAD
         INSERT INTO "${this.tableName}"
         (${columns})
         VALUES (${placeholders})
         RETURNING *
       `,
 =======
+=======
+>>>>>>> feature/ROUTESRATE
           INSERT INTO "${this.tableName}"
           (${columns})
           VALUES (${placeholders})
           RETURNING *
         `,
+<<<<<<< HEAD
 >>>>>>> feature/ROUTESGAMES
+=======
+>>>>>>> feature/ROUTESRATE
       values,
     );
     return result.rows[0];
@@ -54,6 +60,7 @@ export default class CoreDatamapper {
     const result = await this.client.query(
       `
 <<<<<<< HEAD
+<<<<<<< HEAD
         UPDATE ${this.tableName} SET
           ${fieldPlaceholders},
           updated_at = now()
@@ -61,13 +68,18 @@ export default class CoreDatamapper {
         RETURNING *
       `,
 =======
+=======
+>>>>>>> feature/ROUTESRATE
           UPDATE ${this.tableName} SET
             ${fieldPlaceholders},
             updated_at = now()
           WHERE id = $${fieldPlaceholders.length + 1}
           RETURNING *
         `,
+<<<<<<< HEAD
 >>>>>>> feature/ROUTESGAMES
+=======
+>>>>>>> feature/ROUTESRATE
       [...values, id],
     );
 

@@ -31,9 +31,13 @@ export default class CoreController {
     if (!row) {
       return next(
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
         // eslint-disable-next-line no-undef
 >>>>>>> feature/ROUTESGAMES
+=======
+        // eslint-disable-next-line no-undef
+>>>>>>> feature/ROUTESRATE
         new ApiError(`${this.entityName} not found`, { status: 404 }),
       );
     }
@@ -46,9 +50,13 @@ export default class CoreController {
     if (!deleted) {
       return next(
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
         // eslint-disable-next-line no-undef
 >>>>>>> feature/ROUTESGAMES
+=======
+        // eslint-disable-next-line no-undef
+>>>>>>> feature/ROUTESRATE
         new ApiError(`${this.entityName} not found`, { status: 404 }),
       );
     }
