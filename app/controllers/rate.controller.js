@@ -1,4 +1,4 @@
-import RateDatamapper from "../datamappers/index.datamapper.js";
+import { RateDatamapper } from "../datamappers/index.datamapper.js";
 import CoreController from "./core.controller.js";
 
 export default class PostController extends CoreController{

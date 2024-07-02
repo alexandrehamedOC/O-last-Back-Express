@@ -4,7 +4,8 @@ export default class RateDatamapper extends CoreDatamapper {
   static tableName = 'rate';
 
   static async getAllByUser(userId) {
-    const {rows} = await this.client.query(`
+    const { rows } = await this.client.query(
+      `
       SELECT 
 "rate"."id" as "rate_id", 
 "note", 
@@ -21,8 +22,9 @@ JOIN "profil" ON "profil"."id" = "rate"."receiver_profil_id"
 JOIN "user" ON "profil"."user_id" = "user"."id"
 JOIN "game" ON "profil"."game_id" = "game"."id"
 WHERE "rate"."receiver_profil_id" =$1;
-      `, [userId]);
+      `,
+      [userId]
+    );
     return rows[0];
   }
-
 }

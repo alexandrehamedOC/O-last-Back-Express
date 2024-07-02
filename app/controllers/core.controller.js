@@ -30,14 +30,6 @@ export default class CoreController {
     const row = await this.mainDatamapper.update(id, input);
     if (!row) {
       return next(
-<<<<<<< HEAD
-<<<<<<< HEAD
-=======
-        // eslint-disable-next-line no-undef
->>>>>>> feature/ROUTESGAMES
-=======
-        // eslint-disable-next-line no-undef
->>>>>>> feature/ROUTESRATE
         new ApiError(`${this.entityName} not found`, { status: 404 }),
       );
     }
@@ -49,14 +41,6 @@ export default class CoreController {
     const deleted = await this.mainDatamapper.delete(id);
     if (!deleted) {
       return next(
-<<<<<<< HEAD
-<<<<<<< HEAD
-=======
-        // eslint-disable-next-line no-undef
->>>>>>> feature/ROUTESGAMES
-=======
-        // eslint-disable-next-line no-undef
->>>>>>> feature/ROUTESRATE
         new ApiError(`${this.entityName} not found`, { status: 404 }),
       );
     }

@@ -11,11 +11,9 @@ RateDatamapper.init({client});
 
 /**export datamapper here */
 
-export default { 
+export { 
     GameDatamapper,
     PostDatamapper,
     RateDatamapper
-};
-
-
+}
 
