@@ -4,7 +4,6 @@ export default class CoreController {
 
   static async getAll(_, res) {
     try{
-      console.log('get all', this.mainDatamapper);
       const rows = await this.mainDatamapper.findAll();
       return res.json({ data: rows });
     } catch (error) {
