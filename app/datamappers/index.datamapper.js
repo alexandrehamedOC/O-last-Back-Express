@@ -7,8 +7,8 @@ import UserDatamapper from './user.datamapper.js';
 /**Initialisez le DataMapper avec le client */
 PostDatamapper.init({ client });
 GameDatamapper.init({ client });
-RateDatamapper.init({client});
-UserDatamapper.init({client});
+RateDatamapper.init({ client });
+UserDatamapper.init({ client });
 
 
 /**export datamapper here */
