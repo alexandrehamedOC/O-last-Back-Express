@@ -2,6 +2,6 @@
 
 BEGIN;
 
-DROP TABLE IF EXISTS "rate", "profil", "post", "game", "user";
+DROP TABLE IF EXISTS "rate", "profil", "post", "game", "users";
 
 COMMIT;

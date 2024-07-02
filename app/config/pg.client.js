@@ -1,6 +1,8 @@
 import pg from 'pg';
 
-const client = new pg.Client(process.env.PG_URL);
+const { Pool } = pg;
+
+const client = new Pool({connectionString: process.env.PGURL}) ;
 
 await client.connect();
 
