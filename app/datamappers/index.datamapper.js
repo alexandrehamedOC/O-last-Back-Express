@@ -1,14 +1,7 @@
 import client from '../config/pg.client.js';
+import PostDatamapper from './post.datamapper.js';
 
-/**Import others datamapper here */
+/**Initialisez le DataMapper avec le client */
+PostDatamapper.init({ client });
 
-
-
-/**Inject client */
-
-export default {
-    /**export datamapper here */
-
-
-
-}
+export default PostDatamapper;

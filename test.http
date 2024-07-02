@@ -1,0 +1,41 @@
+@endpoint=http://localhost:3000/api/v1
+
+GET {{endpoint}}/posts
+
+###
+GET {{endpoint}}/posts/1
+
+###
+GET {{endpoint}}/posts/user/1
+
+###
+
+POST {{endpoint}}/posts
+Content-Type: application/json
+
+{
+  "title": "test ded",
+  "platform": "ps5",
+  "description": "test desc",
+  "schedule_start": "2021-09-01T00:00:00.000Z",
+  "schedule_end": "2021-09-02T00:00:00.000Z",
+  "status": true,
+  "user_id": 1,
+  "game_id": 3
+}
+
+###
+
+PATCH {{endpoint}}/posts/1
+Content-Type: application/json
+
+{
+  "title": "test3",
+  "platform": "ps4",
+  "description": "test desc",
+  "schedule_start": "2021-09-01T00:00:00.000Z",
+  "schedule_end": "2021-09-02T00:00:00.000Z",
+  "status": true,
+  "user_id": 1,
+  "game_id": 3
+}
