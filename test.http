@@ -75,3 +75,6 @@ Content-Type: application/json
 ###
 DELETE http://localhost:3000/api/v1/rates/1
 Authorization: Bearer 
+
+### Get user datails
+GET http://localhost:3000/api/v1/users/4/profil
