@@ -1,0 +1,39 @@
+GET http://localhost:3000/api/v1/games
+###
+
+GET http://localhost:3000/api/v1/posts/1
+
+
+@endpoint=http://localhost:3000/api/v1
+
+###get all users
+GET {{endpoint}}/users
+
+### get one user
+GET {{endpoint}}/users/1
+
+### Create a user
+POST http://localhost:3000/api/v1/users
+Content-Type: application/json
+
+{
+"firstname": "Alexandre",
+"lastname": "Hamed",
+"email": "alexandrehamed@hotmail.fr",
+"password": "pass",
+"birth_date": "1990-05-14T22:00:00.000Z",
+"discord_username": "JohnDoe#1234",
+"city": "Noisy-le-roi"
+}
+
+### Update a user
+PATCH http://localhost:3000/api/v1/users/4
+Content-Type: application/json
+
+{
+"firstname": "AlexandreUpdatedbis"
+}
+
+### delete user
+DELETE http://localhost:3000/api/v1/users/2
+

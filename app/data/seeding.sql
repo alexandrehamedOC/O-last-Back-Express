@@ -3,7 +3,7 @@ BEGIN;
 -- Insertion des utilisateurs
 
 
-INSERT INTO "user" ("firstname", "lastname", "email", "password", "birth_date", "discord_username", "city")
+INSERT INTO "users" ("firstname", "lastname", "email", "password", "birth_date", "discord_username", "city")
 VALUES
 ('John', 'Doe', 'john.doe@example.com', 'hashed_password1', '1990-05-15', 'JohnDoe#1234', 'New York'),
 ('Jane', 'Smith', 'jane.smith@example.com', 'hashed_password2', '1992-07-22', 'JaneSmith#5678', 'Los Angeles'),

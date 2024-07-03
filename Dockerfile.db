@@ -1,0 +1,16 @@
+# Utilise l'image officielle de PostgreSQL
+FROM postgres:16.3-bullseye
+
+# Définit les variables d'environnement pour PostgreSQL
+ENV POSTGRES_PASSWORD olast
+ENV POSTGRES_USER olast
+ENV POSTGRES_DB olast
+
+# Copie le script d'initialisation de la base de données dans le conteneur
+COPY ./app/migrations/deploy/01-data-base-initialisation.sql /docker-entrypoint-initdb.d/01-data-base-initialisation.sql
+
+# Expose le port par défaut de PostgreSQL
+EXPOSE 5432
+
+# Commande par défaut pour démarrer PostgreSQL
+CMD ["postgres"]

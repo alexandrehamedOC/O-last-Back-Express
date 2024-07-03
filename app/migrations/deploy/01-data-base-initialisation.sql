@@ -2,14 +2,14 @@
 
 BEGIN;
 
-DROP TABLE IF EXISTS "rate", "profil", "post", "game", "user";
+DROP TABLE IF EXISTS "rate", "profil", "post", "game", "users";
 
 -- XXX Add DDLs here.
 
-CREATE TABLE "user" (
+CREATE TABLE "users" (
 "id" int GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
-"firstname" TEXT NOT NULL UNIQUE,
-"lastname" TEXT NOT NULL UNIQUE,
+"firstname" TEXT NOT NULL ,
+"lastname" TEXT NOT NULL ,
 "email" TEXT NOT NULL UNIQUE,
 "password" TEXT NOT NULL,
 "birth_date" timestamptz NOT NULL,
@@ -39,8 +39,8 @@ CREATE TABLE "post" (
 "schedule_start" timestamptz,
 "schedule_end" timestamptz,
 "status" boolean,
-"user_id" int NOT NULL REFERENCES "user"("id"),
-"game_id" int NOT NULL REFERENCES "game"("id"),
+"user_id" int NOT NULL REFERENCES "users"("id") ON DELETE CASCADE,
+"game_id" int NOT NULL REFERENCES "game"("id") ON DELETE CASCADE,
 "created_at" timestamptz NOT NULL DEFAULT now(),
 "updated_at" timestamptz
 );
@@ -51,8 +51,8 @@ CREATE TABLE "profil" (
     "description" text NOT NULL,
     "rank" text NOT NULL,
     "level" int NOT NULL,
-    "game_id" int NOT NULL REFERENCES "game" ("id"),
-    "user_id" int NOT NULL REFERENCES "user" ("id"),
+    "game_id" int NOT NULL REFERENCES "game" ("id") ON DELETE CASCADE,
+    "user_id" int NOT NULL REFERENCES "users" ("id") ON DELETE CASCADE,
     "created_at" timestamptz NOT NULL DEFAULT now(),
     "updated_at" timestamptz
 );
@@ -61,8 +61,8 @@ CREATE TABLE "rate" (
 "id" int GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
 "note" int NOT NULL CHECK (note <= 5),
 "description" TEXT NOT NULL,
-"sender_user_id" int NOT NULL REFERENCES "user" ("id"),
-"receiver_profil_id" int NOT NULL REFERENCES "profil" ("id"),
+"sender_user_id" int NOT NULL REFERENCES "users" ("id") ON DELETE CASCADE,
+"receiver_profil_id" int NOT NULL REFERENCES "profil" ("id") ON DELETE CASCADE,
 "created_at" timestamptz NOT NULL DEFAULT now(),
 "updated_at" timestamptz
 );
