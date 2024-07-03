@@ -1,3 +1,5 @@
+import ApiError from '../errors/api.errors.js';
+
 export default class CoreController {
   static entityName = null;
   static mainDatamapper = null;

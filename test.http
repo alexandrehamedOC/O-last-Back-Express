@@ -62,3 +62,12 @@ Content-Type: application/json
   "name": "Updated Gamer"
  
 }
+
+### Test login user
+POST http://localhost:3000/api/v1/login
+Content-Type: application/javascript
+
+{
+  "email":"john.doe@example.com",
+  "password":"hashed_password1",
+}
