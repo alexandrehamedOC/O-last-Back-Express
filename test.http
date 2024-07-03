@@ -37,3 +37,28 @@ Content-Type: application/json
 ### delete user
 DELETE http://localhost:3000/api/v1/users/2
 
+GET http://localhost:3000/api/v1/profil HTTP/1.1
+Content-Type: application/json
+###
+GET http://localhost:3000/api/v1/profil/1 HTTP/1.1
+
+### Test POST request for creating a new profil
+POST http://localhost:3000/api/v1/profil
+Content-Type: application/json
+
+{
+  "name": "New Gamer",
+  "description": "New player in League of Legends",
+  "rank": "Silver",
+  "level": 10,
+  "game_id": 2,
+  "user_id": 2
+}
+### Test PATCH request for updating a profil
+PUT http://localhost:3000/api/v1/profil/1 HTTP/1.1
+Content-Type: application/json
+
+{
+  "name": "Updated Gamer"
+ 
+}
