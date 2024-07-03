@@ -9,10 +9,10 @@ services:
       POSTGRES_DB: olast
     volumes:
       - ./pgsql:/var/lib/postgresql/data
-      - ./app/data/migrations/deploy/01-data-base-initialisation.sql:/docker-entrypoint-initdb.d/01-data-base-initialisation.sql
+      - ./app/data/create_tables.sql:/docker-entrypoint-initdb.d/create_tables.sql
       - ./app/data/seeding.sql:/docker-entrypoint-initdb.d/seeding.sql
     expose:
-      - 5432
+      - "5432"
     ports:
       - "5433:5432"
 
@@ -23,12 +23,12 @@ services:
     ports:
       - "3000:3000"
     environment:
-      PG_URL: postgres://olast:olast@db:5433/olast
-      PG_PORT: 5433
+      PG_URL: postgres://olast:olast@db:5432/olast
     env_file:
       - .env
     volumes:
       - .:/app
+    entrypoint: ["dockerize", "-wait", "tcp://db:5432", "-timeout", "30s", "npm", "start"]
 
 volumes:
   pgdata:
