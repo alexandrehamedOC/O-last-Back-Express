@@ -65,9 +65,13 @@ Content-Type: application/json
 
 ### Test login user
 POST http://localhost:3000/api/v1/login
-Content-Type: application/javascript
+Content-Type: application/json
 
 {
-  "email":"john.doe@example.com",
-  "password":"hashed_password1",
+  "email": "john.doe@example.com",
+  "password": "hashed_password1"
 }
+
+###
+DELETE http://localhost:3000/api/v1/rates/1
+Authorization: Bearer 

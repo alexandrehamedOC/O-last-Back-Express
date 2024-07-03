@@ -23,7 +23,7 @@ JOIN "user" ON "profil"."user_id" = "user"."id"
 JOIN "game" ON "profil"."game_id" = "game"."id"
 WHERE "rate"."receiver_profil_id" =$1;
       `,
-      [userId]
+      [userId],
     );
     return rows[0];
   }

@@ -13,10 +13,10 @@ UserDatamapper.init({ client });
 
 /**export datamapper here */
 
-export { 
-    GameDatamapper,
-    PostDatamapper,
-    RateDatamapper,
-    UserDatamapper,
-    ProfilDatamapper,
-}
+export {
+  GameDatamapper,
+  PostDatamapper,
+  RateDatamapper,
+  UserDatamapper,
+  ProfilDatamapper,
+};

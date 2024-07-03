@@ -12,8 +12,6 @@ export default class CoreController {
     } catch (error) {
       console.log(error);
     }
-
-    return res.json({ data: rows });
   }
 
   static async getOne(req, res) {
@@ -46,7 +44,7 @@ export default class CoreController {
     const deleted = await this.mainDatamapper.delete(id);
     if (!deleted) {
       return next(
-        new ApiError(`${this.entityName} not found`, { status: 404 })
+        new ApiError(`${this.entityName} not found`, { status: 404 }),
       );
     }
     return res.status(204).json();
