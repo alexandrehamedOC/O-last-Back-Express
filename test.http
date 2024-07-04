@@ -17,13 +17,13 @@ POST http://localhost:3000/api/v1/users
 Content-Type: application/json
 
 {
-"firstname": "Alexandre",
-"lastname": "Hamed",
-"email": "alexandrehamed@hotmail.fr",
-"password": "pass",
+"firstname": "Alexandzere1",
+"lastname": "Hazmed1",
+"email": "alexandrehzamed@hotmail.fr2",
+"password": "paszs",
 "birth_date": "1990-05-14T22:00:00.000Z",
-"discord_username": "JohnDoe#1234",
-"city": "Noisy-le-roi"
+"discord_username": "JohnaDoe#1234",
+"city": "Noisy-lee-roi"
 }
 
 ### Update a user

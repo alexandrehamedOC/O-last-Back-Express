@@ -2,4 +2,4 @@
 node_modules
 sqitch.conf
 test.http
-pgsql/
+/pgsql
