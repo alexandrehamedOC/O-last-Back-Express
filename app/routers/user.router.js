@@ -12,8 +12,7 @@ router.route("/:id")
   .delete(UserController.delete.bind(UserController))
   .patch(UserController.update.bind(UserController));
 
-router.route("/:id/profil")
-  .get(UserController.getUserProfiles.bind(UserController));
+
 
 router.route("/:id/details")
   .get(UserController.getUserDetails.bind(UserController));
