@@ -37,6 +37,8 @@ Content-Type: application/json
 ### delete user
 DELETE http://localhost:3000/api/v1/users/2
 
+###
+
 GET http://localhost:3000/api/v1/profil HTTP/1.1
 Content-Type: application/json
 ###
@@ -63,6 +65,7 @@ Content-Type: application/json
  
 }
 
+
 ### Test login user
 POST http://localhost:3000/api/v1/login
 Content-Type: application/json
@@ -75,3 +78,6 @@ Content-Type: application/json
 ###
 DELETE http://localhost:3000/api/v1/rates/1
 Authorization: Bearer 
+
+### Get user datails
+GET http://localhost:3000/api/v1/users/4/details

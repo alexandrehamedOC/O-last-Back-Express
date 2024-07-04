@@ -19,4 +19,33 @@ export default class UserController extends CoreController{
     const token = jwt.sign({email} , process.env.TOKEN_SECRET, { expiresIn: '2h' });
     res.send({ token });
   }
+
+  static async getUserDetails(req, res, next){
+    const {id} = req.params;
+    try {
+      const details = await UserDatamapper.userDetails(id);
+      // if(!user){
+      //   return next(new ApiError(`${this.entityName} not found`, {status: 404}));
+      // }
+
+      return res.json({data: details});
+    } catch (error) {
+      console.error(error);
+      return next(new ApiError('Internal server error', {status: 500}));
+    }
+  }
+
+  // static async getUserProfiles(req, res, next){
+  //   const {id} = req.params;
+  //   try {
+  //     const profiles = await ProfilDatamapper.findByUserId(id);
+  //     if(!profiles){
+  //       return next(new ApiError(`${this.entityName} npm`, {status: 404}));
+  //     }
+  //     return res.json({data: profiles});
+  //   } catch (error) {
+  //     console.error(error);
+  //     return next(new ApiError('Internal server error', {status: 500}));
+  //   }
+  // }
 }
