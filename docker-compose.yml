@@ -28,7 +28,7 @@ services:
       - .env
     volumes:
       - .:/app
-    entrypoint: ["dockerize", "-wait", "tcp://db:5432", "-timeout", "30s", "npm", "start"]
+    entrypoint: ["dockerize", "-wait", "tcp://db:5432", "-timeout", "30s", "npm", "run", "dev"]
 
 volumes:
   pgdata:

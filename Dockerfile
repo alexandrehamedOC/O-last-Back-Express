@@ -27,4 +27,4 @@ COPY . .
 EXPOSE 3000
 
 # Définit la commande pour démarrer l'application
-CMD ["npm", "start"]
+CMD ["npm", "run", "dev"]

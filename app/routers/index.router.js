@@ -4,7 +4,7 @@ import gameRouter from './gameRouter.js';
 import rateRouter from './rateRouter.js';
 import userRouter from './user.router.js';
 import profilRouter from './profil.router.js';
-import loginRouter from './login.router.js'
+import loginRouter from './login.router.js';
 
 export const router = Router();
 
