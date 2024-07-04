@@ -7,7 +7,7 @@ const router = express.Router();
 
 router.route('/rates')
   .get(RateController.getAll.bind(RateController))
-  .post(RateController.create.bind(RateController));
+  .post(RateController.createRate.bind(RateController));
 
 router.route('/rates/:id')
   .get(RateController.getOne.bind(RateController))

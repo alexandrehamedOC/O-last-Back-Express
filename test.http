@@ -3,6 +3,15 @@ GET http://localhost:3000/api/v1/games
 
 GET http://localhost:3000/api/v1/posts/1
 
+###
+POST http://localhost:3000/api/v1/posts
+Content-Type: application/json
+
+{
+  "title": "New post",
+  "platform": "This is a new post"
+}
+
 
 @endpoint=http://localhost:3000/api/v1
 

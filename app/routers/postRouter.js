@@ -6,7 +6,7 @@ const router = express.Router();
 
 router.route('/posts')
   .get(PostController.getAll.bind(PostController))
-  .post(PostController.create.bind(PostController));
+  .post(PostController.createpost.bind(PostController));
 
 router.route('/posts/:id')
   .get(PostController.getOne.bind(PostController))
