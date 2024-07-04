@@ -5,12 +5,28 @@ export default class UserDatamapper extends CoreDatamapper {
   static tableName = "users";
 
   static async findUser(email, password) {
-    const result = await this.client.query(
-      `SELECT * FROM "users" WHERE "email" =$1 AND password =$2`,
-      [email, password]
-    );
-    const { rows } = result;
-    return rows[0];
+    try {
+      const result = await this.client.query(
+        `SELECT * FROM "users" WHERE "email" =$1`,
+        [email]
+      );
+      const user = result.rows[0];
+      
+      if(!user){
+        return null;
+      }
+      const isMatch = await bcrypt.compare(password, user.password);
+      console.log(isMatch);
+      if (isMatch){
+        return user;
+      }
+      else{
+        return null
+      }
+
+    } catch (error) {
+        throw error;
+    }
   }
   static async createUser({
     firstname,
@@ -48,7 +64,9 @@ export default class UserDatamapper extends CoreDatamapper {
       JOIN "profil" ON "users"."id" = "profil"."user_id"
       JOIN "rate" ON "rate"."receiver_profil_id" = "profil"."id"
       WHERE "users"."id" = $1
-      `, [id]);
+      `,
+      [id]
+    );
 
     return rows;
   }
