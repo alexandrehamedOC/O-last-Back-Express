@@ -63,7 +63,7 @@ Content-Type: application/json
   "rank": "Silver",
   "level": 10,
   "game_id": 2,
-  "user_id": 2
+  "user_id": 3
 }
 ### Test PATCH request for updating a profil
 PUT http://localhost:3000/api/v1/profil/1 HTTP/1.1

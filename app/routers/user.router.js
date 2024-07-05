@@ -1,18 +1,24 @@
 import express from "express";
 import UserController from "../controllers/user.controller.js";
+import { userSchema } from "../utils/validationSchemas.js";
+import validationMiddleware from "../middleware/validation.middleware.js"; // Assurez-vous que le chemin est correct
 
 const router = express.Router();
 
 router.route("/")
   .get(UserController.getAll.bind(UserController))
-  .post(UserController.createAccount.bind(UserController));
+  .post(
+    validationMiddleware(UserController.validateSchema), // Utilisez la méthode statique directement
+    UserController.createAccount.bind(UserController),
+  );
 
 router.route("/:id")
   .get(UserController.getOne.bind(UserController))
   .delete(UserController.delete.bind(UserController))
-  .patch(UserController.update.bind(UserController));
-
-
+  .patch(
+    validationMiddleware(UserController.validateSchema), // Utilisez la méthode statique directement
+    UserController.update.bind(UserController),
+  );
 
 router.route("/:id/details")
   .get(UserController.getUserDetails.bind(UserController));

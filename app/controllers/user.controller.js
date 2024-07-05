@@ -7,6 +7,7 @@ import jwt from 'jsonwebtoken';
 export default class UserController extends CoreController{
   static entityName = 'Users';
   static mainDatamapper = UserDatamapper;
+  static validateSchema = userSchema;
 
   static async getLogUser (req, res, next){
     try {
