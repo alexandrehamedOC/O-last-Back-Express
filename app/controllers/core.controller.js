@@ -8,7 +8,7 @@ export default class CoreController {
 
     try{
       const rows = await this.mainDatamapper.findAll();
-      return res.json({ data: rows });
+      return res.json( rows );
     } catch (error) {
       console.log(error);
     }
@@ -17,14 +17,14 @@ export default class CoreController {
   static async getOne(req, res) {
     const { id } = req.params;
     const row = await this.mainDatamapper.findByPk(id);
-    return res.json({ data: row });
+    return res.json( row );
   }
 
   static async create(req, res) {
     const input = req.body;
     const row = await this.mainDatamapper.create(input);
     // 201 Created
-    return res.status(201).json({ data: row });
+    return res.status(201).json( row );
   }
 
   static async update(req, res, next) {
@@ -36,7 +36,7 @@ export default class CoreController {
         new ApiError(`${this.entityName} not found`, { status: 404 }),
       );
     }
-    return res.json({ data: row });
+    return res.json( row );
   }
 
   static async delete(req, res, next) {

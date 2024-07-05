@@ -8,6 +8,6 @@ export default class PostController extends CoreController{
   static async findByUserId(req, res){
     const { userId } = req.params;
     const rows = await this.mainDatamapper.findByUserId(userId);
-    return res.json({ data: rows });
+    return res.json( rows );
   }
 }

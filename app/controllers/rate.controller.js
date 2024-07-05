@@ -10,7 +10,7 @@ export default class PostController extends CoreController{
 
     const rates = await this.mainDatamapper.getAllByUser(userId);
 
-    return res.json({ data: rates });
+    return res.json( rates );
 
   }
 
