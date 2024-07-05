@@ -8,11 +8,18 @@ POST http://localhost:3000/api/v1/posts
 Content-Type: application/json
 
 {
-  "title": "New post",
-  "platform": "This is a new post"
+  "title": "New Gaming Event",
+  "platform": "PC",
+  "description": "Join us for an exciting new gaming event!",
+  "schedule_start": "2024-07-10T14:00:00Z",
+  "schedule_end": "2024-07-10T16:00:00Z",
+  "user_id": 1,
+  "game_id": 2,
+  "status": true
 }
 
 
+###
 @endpoint=http://localhost:3000/api/v1
 
 ###get all users
@@ -28,9 +35,9 @@ Content-Type: application/json
 {
 "firstname": "Alexandzere1",
 "lastname": "Hazmed1",
-"email": "alexandrehzamed@hotmail.fr2",
-"password": "paszs",
-"birth_date": "1990-05-14T22:00:00.000Z",
+"email": "alexandrehzamed@hotmail.fr",
+"password": "paszs?M.1",
+"birth_date": "1990-05-19",
 "discord_username": "JohnaDoe#1234",
 "city": "Noisy-lee-roi"
 }
@@ -61,7 +68,7 @@ Content-Type: application/json
   "name": "New Gamer",
   "description": "New player in League of Legends",
   "rank": "Silver",
-  "level": 10,
+  "level": 3,
   "game_id": 2,
   "user_id": 3
 }

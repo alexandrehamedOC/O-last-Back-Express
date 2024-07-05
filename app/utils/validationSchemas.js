@@ -10,8 +10,8 @@ export const userSchema = Joi.object({
     .pattern(new RegExp('(?=.*[a-z])(?=.*[A-Z])(?=.*\\d)(?=.*[$@$!%*?&.])[A-Za-z\\d$@$!%*?&.]{8,20}'))
     .required()
     .min(8),
-  birthDate: Joi.date().iso().required(),
-  discordUsername: Joi.string().required(),
+  birth_date: Joi.date().iso().required(),
+  discord_username: Joi.string().required(),
   city: Joi.string().required(),
 });
 
@@ -34,7 +34,7 @@ export const profilSchema = Joi.object({
 
 export const postSchema = Joi.object({
   title: Joi.string().required(),
-  plateform: Joi.string().required(),
+  platform: Joi.string().required(),
   description: Joi.string().required(),
   schedule_start: Joi.date().iso().required(),
   schedule_end: Joi.date().iso().required(),

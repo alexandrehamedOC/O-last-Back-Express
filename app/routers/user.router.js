@@ -8,7 +8,7 @@ const router = express.Router();
 router.route("/")
   .get(UserController.getAll.bind(UserController))
   .post(
-    validationMiddleware(UserController.validateSchema), // Utilisez la méthode statique directement
+    validationMiddleware(userSchema), // Utilisez la méthode statique directement
     UserController.createAccount.bind(UserController),
   );
 
@@ -16,7 +16,7 @@ router.route("/:id")
   .get(UserController.getOne.bind(UserController))
   .delete(UserController.delete.bind(UserController))
   .patch(
-    validationMiddleware(UserController.validateSchema), // Utilisez la méthode statique directement
+    validationMiddleware(userSchema), // Utilisez la méthode statique directement
     UserController.update.bind(UserController),
   );
 
