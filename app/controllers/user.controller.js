@@ -58,7 +58,7 @@ export default class UserController extends CoreController{
       const user = await UserDatamapper.createUser(input);
       return res.status(201).json(user);
     } catch (error) {
-      return res.status(500).json({ error: 'Unable to create account' });
+      return res.status(500).json(error, { error: 'Unable to create account' });
     }
   }
 }

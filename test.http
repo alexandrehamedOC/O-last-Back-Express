@@ -19,8 +19,8 @@ Content-Type: application/json
 {
 "firstname": "Alexandzere1",
 "lastname": "Hazmed1",
-"email": "alexandrehzamed@hotmail.fr2",
-"password": "paszs",
+"email": "bla@bla",
+"password": "mdp",
 "birth_date": "1990-05-14T22:00:00.000Z",
 "discord_username": "JohnaDoe#1234",
 "city": "Noisy-lee-roi"
@@ -71,8 +71,8 @@ POST http://localhost:3000/api/v1/login
 Content-Type: application/json
 
 {
-  "email": "john.doe@example.com",
-  "password": "hashed_password1"
+  "email": "bla@bla",
+  "password": "mdp"
 }
 
 ###
