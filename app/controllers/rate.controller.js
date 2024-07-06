@@ -1,5 +1,6 @@
 import { RateDatamapper } from "../datamappers/index.datamapper.js";
 import CoreController from "./core.controller.js";
+import ApiError from "../errors/api.errors.js";
 
 export default class PostController extends CoreController{
   static entityName = 'Rate';
@@ -8,10 +9,19 @@ export default class PostController extends CoreController{
   static async getRatesByUser(req, res) {
     const {userId } = req.params;
 
-    const rates = await this.mainDatamapper.getAllByUser(userId);
+    try {
+      const rates = await this.mainDatamapper.getAllByUser(userId);
 
-    return res.json( rates );
+      if (!rates) {
+        throw new ApiError('Rates not found', 404, 'NOT_FOUND   ');
+      }
 
+      return res.json( rates );
+    }
+    catch (error) {
+      console.error(error);
+      throw new ApiError();
+    }
   }
 
 }

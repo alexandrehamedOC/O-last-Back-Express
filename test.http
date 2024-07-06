@@ -19,7 +19,7 @@ Content-Type: application/json
 {
 "firstname": "Alexandzere1",
 "lastname": "Hazmed1",
-"email": "bla@bla",
+"email": "bla@bljjga",
 "password": "mdp",
 "birth_date": "1990-05-14T22:00:00.000Z",
 "discord_username": "JohnaDoe#1234",
@@ -27,7 +27,7 @@ Content-Type: application/json
 }
 
 ### Update a user
-PATCH http://localhost:3000/api/v1/users/4
+PATCH http://localhost:3000/api/v1/users/30
 Content-Type: application/json
 
 {
@@ -35,7 +35,7 @@ Content-Type: application/json
 }
 
 ### delete user
-DELETE http://localhost:3000/api/v1/users/2
+DELETE http://localhost:3000/api/v1/users/4
 
 ###
 
@@ -65,19 +65,17 @@ Content-Type: application/json
  
 }
 
-
-### Test login user
+### Authentification et récupération du jeton
+# @name login
 POST http://localhost:3000/api/v1/login
 Content-Type: application/json
 
 {
-  "email": "bla@bla",
+  "email": "bla@bljjga",
   "password": "mdp"
 }
 
-###
+### delete rates/id
 DELETE http://localhost:3000/api/v1/rates/1
-Authorization: Bearer 
-
-### Get user datails
-GET http://localhost:3000/api/v1/users/4/details
+Content-Type: application/json
+Authorization: Bearer {{login.response.body.token}}
