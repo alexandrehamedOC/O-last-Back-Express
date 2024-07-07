@@ -28,5 +28,5 @@ export default class PostController extends CoreController{
     const rows = await this.mainDatamapper.findByUserId(userId);
     return res.json({ data: rows });
   }
-  
+
 }

@@ -20,7 +20,7 @@ export const rateSchema = Joi.object({
   note: Joi.number().integer().min(1).max(5).required(),
   description: Joi.string().required(),
   sender_user_id: Joi.number().integer().required(),
-  receiver_user_id: Joi.number().integer().required(),
+  receiver_profil_id: Joi.number().integer().required(),
 });
 
 export const profilSchema = Joi.object({

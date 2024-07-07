@@ -95,5 +95,17 @@ Content-Type: application/json
 DELETE http://localhost:3000/api/v1/rates/1
 Authorization: Bearer 
 
+### Test POST request for creating a new rate
+
+POST http://localhost:3000/api/v1/rates
+Content-Type: application/json
+
+{
+  "note": 5,
+  "description": "Great player",
+  "sender_user_id": 1,
+  "receiver_profil_id": 1
+}
+
 ### Get user datails
 GET http://localhost:3000/api/v1/users/4/details
