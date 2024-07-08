@@ -5,23 +5,41 @@ export default class UserDatamapper extends CoreDatamapper {
   static tableName = "users";
 
   static async findUser(email, password) {
-    console.log(email, password);
-    const result = await this.client.query(
-      `SELECT * FROM ${this.tableName} WHERE "email" =$1`,
-      [email],
-    );
-    const user = result.rows[0];
+    try {
+      const result = await this.client.query(
+        `SELECT * FROM "users" WHERE "email" =$1`,
+        [email]
+      );
+      const user = result.rows[0];
 
-    if(!user){
-      return null;
+      if (!user) {
+        return null;
+      }
+      const isMatch = await bcrypt.compare(password, user.password);
+      console.log(isMatch);
+      if (isMatch) {
+        return user;
+      } else {
+        return null;
+      }
+    } catch (error) {
+      throw error;
     }
-    const isMatch = await bcrypt.compare(password, user.password);
-    console.log(isMatch);
-    if (isMatch){
+  }
+  static async getUserByMail(email) {
+    try {
+      const result = await this.client.query(
+        `SELECT * FROM "users" WHERE "email" =$1`,
+        [email]
+      );
+      const user = result.rows[0];
+
+      if (!user) {
+        return null;
+      }
       return user;
-    }
-    else{
-      return null;
+    } catch (error) {
+      throw error;
     }
   }
 
@@ -82,6 +100,14 @@ export default class UserDatamapper extends CoreDatamapper {
       [id],
     );
 
+    return rows;
+  }
+  static async updatePassword(newPassword, email) {
+    const result = this.client.query(
+      `UPDATE users SET password = $1 WHERE email = $2`,
+      [newPassword, email]
+    );
+    const { rows } = result;
     return rows;
   }
 }
