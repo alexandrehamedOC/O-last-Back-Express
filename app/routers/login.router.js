@@ -110,4 +110,10 @@ const router = express.Router();
 router.route('/login')
   .post(UserController.getLogUser.bind(UserController));
 
+router.route('/forgot-password')
+  .post(UserController.resetPassword.bind(UserController));
+
+router.route('/forgot-password/:token')
+  .post(UserController.submitNewPassword.bind(UserController));
+
 export default router;

@@ -11,21 +11,35 @@ export default class UserDatamapper extends CoreDatamapper {
         [email]
       );
       const user = result.rows[0];
-      
-      if(!user){
+
+      if (!user) {
         return null;
       }
       const isMatch = await bcrypt.compare(password, user.password);
       console.log(isMatch);
-      if (isMatch){
+      if (isMatch) {
         return user;
+      } else {
+        return null;
       }
-      else{
-        return null
-      }
-
     } catch (error) {
-        throw error;
+      throw error;
+    }
+  }
+  static async getUserByMail(email) {
+    try {
+      const result = await this.client.query(
+        `SELECT * FROM "users" WHERE "email" =$1`,
+        [email]
+      );
+      const user = result.rows[0];
+
+      if (!user) {
+        return null;
+      }
+      return user;
+    } catch (error) {
+      throw error;
     }
   }
   static async createUser({
@@ -69,5 +83,13 @@ export default class UserDatamapper extends CoreDatamapper {
     );
 
     return rows;
+  }
+  static async updatePassword(newPassword, email) {
+    const result = this.client.query(
+      `UPDATE users SET password = $1 WHERE email = $2`,
+      [newPassword, email]
+    );
+    const { rows } = result;
+    return rows[0];
   }
 }
