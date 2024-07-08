@@ -90,6 +90,6 @@ export default class UserDatamapper extends CoreDatamapper {
       [newPassword, email]
     );
     const { rows } = result;
-    return rows[0];
+    return rows;
   }
 }

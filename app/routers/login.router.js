@@ -1,5 +1,5 @@
-import express from 'express';
-import UserController from '../controllers/user.controller.js';
+import express from "express";
+import UserController from "../controllers/user.controller.js";
 
 const router = express.Router();
 
@@ -107,13 +107,14 @@ const router = express.Router();
  *         description: E-mail ou mot de passe incorrect
  */
 
-router.route('/login')
-  .post(UserController.getLogUser.bind(UserController));
+router.route("/login").post(UserController.getLogUser.bind(UserController));
 
-router.route('/forgot-password')
+router
+  .route("/forgot-password")
   .post(UserController.resetPassword.bind(UserController));
 
-router.route('/forgot-password/:token')
+router
+  .route("/forgot-password/:token")
   .post(UserController.submitNewPassword.bind(UserController));
 
 export default router;

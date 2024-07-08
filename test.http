@@ -91,9 +91,9 @@ Content-Type: application/json
 }
 
 ###new password form submission
-POST  http://localhost:3000/api/v1/forgot-password/eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImFsZXhhbmRyZWhhbWVkQGhvdG1haWwuZnIiLCJpYXQiOjE3MjA0NDc1MzMsImV4cCI6MTcyMDQ1NDczM30.nVvbPuAd16XIBGOlXI2puLGAb6vHg_7QL27_D5J99cs
-Content-Type: : application/json
+POST http://localhost:3000/api/v1/forgot-password/eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImFsZXhhbmRyZWhhbWVkQGhvdG1haWwuZnIiLCJpYXQiOjE3MjA0NDc1MzMsImV4cCI6MTcyMDQ1NDczM30.nVvbPuAd16XIBGOlXI2puLGAb6vHg_7QL27_D5J99cs
+Content-Type: application/json
 
 {
-  "password":"nvxpasse"
+  "password": "nvxpasse"
 }

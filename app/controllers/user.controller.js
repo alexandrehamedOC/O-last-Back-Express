@@ -115,6 +115,7 @@ export default class UserController extends CoreController {
   }
   static async submitNewPassword(req, res) {
     const { token } = req.params;
+    console.log(req.body);
     const { password } = req.body;
     try {
       const decoded = jwt.verify(token, process.env.TOKEN_SECRET);
