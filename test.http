@@ -26,24 +26,24 @@ Content-Type: application/json
 GET {{endpoint}}/users
 
 ### get one user
-GET {{endpoint}}/users/1
+GET {{endpoint}}/users/145643
 
 ### Create a user
 POST http://localhost:3000/api/v1/users
 Content-Type: application/json
 
 {
-"firstname": "Alexandzere1",
-"lastname": "Hazmed1",
-"email": "alexandrehzamed@hotmail.fr",
-"password": "paszs?M.1",
-"birth_date": "1990-05-19",
+"firstname": "Alexandre",
+"lastname": "Hazmed",
+"email": "bla@bljjga",
+"password": "mdpmdpmdp",
+"birth_date": "1990-05-14",
 "discord_username": "JohnaDoe#1234",
 "city": "Noisy-lee-roi"
 }
 
 ### Update a user
-PATCH http://localhost:3000/api/v1/users/4
+PATCH http://localhost:3000/api/v1/users/30
 Content-Type: application/json
 
 {
@@ -51,7 +51,7 @@ Content-Type: application/json
 }
 
 ### delete user
-DELETE http://localhost:3000/api/v1/users/2
+DELETE http://localhost:3000/api/v1/users/4
 
 ###
 
@@ -81,31 +81,17 @@ Content-Type: application/json
  
 }
 
-
-### Test login user
+### Authentification et récupération du jeton
+# @name login
 POST http://localhost:3000/api/v1/login
 Content-Type: application/json
 
 {
-  "email": "bla@bla",
+  "email": "bla@bljjgadsdsedd",
   "password": "mdp"
 }
 
-###
+### delete rates/id
 DELETE http://localhost:3000/api/v1/rates/1
-Authorization: Bearer 
-
-### Test POST request for creating a new rate
-
-POST http://localhost:3000/api/v1/rates
 Content-Type: application/json
-
-{
-  "note": 5,
-  "description": "Great player",
-  "sender_user_id": 1,
-  "receiver_profil_id": 1
-}
-
-### Get user datails
-GET http://localhost:3000/api/v1/users/4/details
+Authorization: Bearer {{login.response.body.token}}

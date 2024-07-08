@@ -13,7 +13,7 @@ export default class CoreDatamapper {
 
   static async findByPk(id) {
     const result = await this.client.query(
-      `SELECT * FROM "${this.tableName}" WHERE id = $1`,
+      `SELECT * FROM "${this.tableName}" WHERE "id" = $1`,
       [id],
     );
     const { rows } = result;
@@ -48,7 +48,7 @@ export default class CoreDatamapper {
         UPDATE ${this.tableName} SET
           ${fieldPlaceholders},
           updated_at = now()
-        WHERE id = $${fieldPlaceholders.length + 1}
+        WHERE "id" = $${fieldPlaceholders.length + 1}
         RETURNING *
       `,
       [...values, id],
@@ -59,7 +59,8 @@ export default class CoreDatamapper {
 
   static async delete(id) {
     const result = await this.client.query(
-      `DELETE FROM ${this.tableName} WHERE id = $1`,
+      `DELETE FROM ${this.tableName} WHERE "id" = $1
+      RETURNING "id"`,
       [id],
     );
 
