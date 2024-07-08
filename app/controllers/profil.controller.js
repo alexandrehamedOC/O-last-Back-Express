@@ -10,9 +10,11 @@ export default class ProfilController extends CoreController {
   static validateSchema = profilSchema;
 
   static async getProfilsByUserId(req, res) {
-    const { userId } = req.params;
+    const { id } = req.params;
+
     try {
-      const profils = await this.mainDatamapper.profilsByUserId(userId);
+      const profils = await this.mainDatamapper.profilsByUserId(id);
+      console.log(profils);
 
       if (!profils) {
         throw new ApiError("Profils not found", 404, "NOT_FOUND");

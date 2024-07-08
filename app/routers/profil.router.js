@@ -110,7 +110,7 @@ router.route("/profil")
     ProfilController.create.bind(ProfilController));
 
 router.route("/profil/details/:id")
-  .get(ProfilController.getOne.bind(ProfilController));
+  .get(ProfilController.getProfilsByUserId.bind(ProfilController));
 
 /**
  * @swagger
