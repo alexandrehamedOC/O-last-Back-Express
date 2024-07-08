@@ -10,18 +10,18 @@ GET http://localhost:3000/api/v1/posts/1
 GET {{endpoint}}/users
 
 ### get one user
-GET {{endpoint}}/users/1
+GET {{endpoint}}/users/145643
 
 ### Create a user
 POST http://localhost:3000/api/v1/users
 Content-Type: application/json
 
 {
-"firstname": "Alexandzere1",
-"lastname": "Hazmed1",
+"firstname": "Alexandre",
+"lastname": "Hazmed",
 "email": "bla@bljjga",
-"password": "mdp",
-"birth_date": "1990-05-14T22:00:00.000Z",
+"password": "mdpmdpmdp",
+"birth_date": "1990-05-14",
 "discord_username": "JohnaDoe#1234",
 "city": "Noisy-lee-roi"
 }
@@ -71,7 +71,7 @@ POST http://localhost:3000/api/v1/login
 Content-Type: application/json
 
 {
-  "email": "bla@bljjga",
+  "email": "bla@bljjgadsdsedd",
   "password": "mdp"
 }
 

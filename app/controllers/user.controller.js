@@ -15,7 +15,8 @@ export default class UserController extends CoreController{
         return next(new ApiError(`${this.entityName} not found`, 404, 'NOT_FOUND'));
       };
       const token = jwt.sign({email} , process.env.TOKEN_SECRET, { expiresIn: '2h' });
-      res.cookie('token', token, {httpOnly: true});
+      res.cookie('token', token, {httpOnly: true}).json({user: result.id});
+      console.log(result);
       console.log(token);
     } catch (error) {
       console.error(error);
@@ -47,7 +48,7 @@ export default class UserController extends CoreController{
         return next(new ApiError('All fields required', 400, 'BAD_REQUEST'));
       }
 
-      const emailExist = await UserDatamapper.findUser(input.email);
+      const emailExist = await UserDatamapper.findByEmail(input.email);
 
       if(emailExist){
         return next(new ApiError('Email already exist', 400, 'BAD_REQUEST'));
