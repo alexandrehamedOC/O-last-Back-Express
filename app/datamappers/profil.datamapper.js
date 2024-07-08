@@ -10,6 +10,7 @@ export default class ProfilDatamapper extends CoreDatamapper {
     const { rows } = await this.client.query(
       `
   SELECT
+    "profil"."id",
   	"profil"."name",
   	"profil"."description",
   	"profil"."rank",
