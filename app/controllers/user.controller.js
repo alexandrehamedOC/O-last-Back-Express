@@ -1,4 +1,5 @@
 import { UserDatamapper } from "../datamappers/index.datamapper.js";
+import { userSchema } from "../utils/validationSchemas.js";
 import CoreController from "./core.controller.js";
 import ApiError from "../errors/api.errors.js";
 import jwt from 'jsonwebtoken';
@@ -6,6 +7,7 @@ import jwt from 'jsonwebtoken';
 export default class UserController extends CoreController{
   static entityName = 'Users';
   static mainDatamapper = UserDatamapper;
+  static validateSchema = userSchema;
 
   static async getLogUser (req, res, next){
     const {email, password} = req.body;
@@ -24,6 +26,8 @@ export default class UserController extends CoreController{
     }
   }
 
+
+  }
   static async getUserDetails(req, res, next){
     const {id} = req.params;
     try {

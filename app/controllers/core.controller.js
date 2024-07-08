@@ -1,8 +1,11 @@
 import ApiError from '../errors/api.errors.js';
-
+import  validationMiddleware  from '../middleware/validation.middleware.js';
 export default class CoreController {
   static entityName = null;
   static mainDatamapper = null;
+  static validateSchema(schema) {
+    return validationMiddleware(schema);
+  }
 
   static async getAll(_, res) {
 
