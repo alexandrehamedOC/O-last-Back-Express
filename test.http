@@ -3,7 +3,23 @@ GET http://localhost:3000/api/v1/games
 
 GET http://localhost:3000/api/v1/posts/1
 
+###
+POST http://localhost:3000/api/v1/posts
+Content-Type: application/json
 
+{
+  "title": "New Gaming Event",
+  "platform": "PC",
+  "description": "Join us for an exciting new gaming event!",
+  "schedule_start": "2024-07-10T14:00:00Z",
+  "schedule_end": "2024-07-10T16:00:00Z",
+  "user_id": 1,
+  "game_id": 2,
+  "status": true
+}
+
+
+###
 @endpoint=http://localhost:3000/api/v1
 
 ###get all users
@@ -19,9 +35,9 @@ Content-Type: application/json
 {
 "firstname": "Alexandzere1",
 "lastname": "Hazmed1",
-"email": "bla@bla",
-"password": "mdp",
-"birth_date": "1990-05-14T22:00:00.000Z",
+"email": "alexandrehzamed@hotmail.fr",
+"password": "paszs?M.1",
+"birth_date": "1990-05-19",
 "discord_username": "JohnaDoe#1234",
 "city": "Noisy-lee-roi"
 }
@@ -52,9 +68,9 @@ Content-Type: application/json
   "name": "New Gamer",
   "description": "New player in League of Legends",
   "rank": "Silver",
-  "level": 10,
+  "level": 3,
   "game_id": 2,
-  "user_id": 2
+  "user_id": 3
 }
 ### Test PATCH request for updating a profil
 PUT http://localhost:3000/api/v1/profil/1 HTTP/1.1
@@ -78,6 +94,18 @@ Content-Type: application/json
 ###
 DELETE http://localhost:3000/api/v1/rates/1
 Authorization: Bearer 
+
+### Test POST request for creating a new rate
+
+POST http://localhost:3000/api/v1/rates
+Content-Type: application/json
+
+{
+  "note": 5,
+  "description": "Great player",
+  "sender_user_id": 1,
+  "receiver_profil_id": 1
+}
 
 ### Get user datails
 GET http://localhost:3000/api/v1/users/4/details
