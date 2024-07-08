@@ -5,29 +5,40 @@ export default class UserDatamapper extends CoreDatamapper {
   static tableName = "users";
 
   static async findUser(email, password) {
-    try {
-      const result = await this.client.query(
-        `SELECT * FROM "users" WHERE "email" =$1`,
-        [email]
-      );
-      const user = result.rows[0];
-      
-      if(!user){
-        return null;
-      }
-      const isMatch = await bcrypt.compare(password, user.password);
-      console.log(isMatch);
-      if (isMatch){
-        return user;
-      }
-      else{
-        return null
-      }
+    console.log(email, password);
+    const result = await this.client.query(
+      `SELECT * FROM ${this.tableName} WHERE "email" =$1`,
+      [email],
+    );
+    const user = result.rows[0];
 
-    } catch (error) {
-        throw error;
+    if(!user){
+      return null;
+    }
+    const isMatch = await bcrypt.compare(password, user.password);
+    console.log(isMatch);
+    if (isMatch){
+      return user;
+    }
+    else{
+      return null;
     }
   }
+
+  static async findByEmail(email) {
+    console.log(email);
+    const result = await this.client.query(
+      `SELECT * FROM ${this.tableName} WHERE "email" =$1`,
+      [email],
+    );
+    const user = result.rows[0];
+
+    if(!user){
+      return null;
+    }
+    return user;
+  }
+
   static async createUser({
     firstname,
     lastname,
@@ -38,9 +49,12 @@ export default class UserDatamapper extends CoreDatamapper {
     discord_username,
   }) {
     const saltRound = 10;
+    console.log(password);
     const hashedPassword = await bcrypt.hash(password, saltRound);
     const result = await this.client.query(
-      `INSERT INTO users (firstname,lastname,email, password,city,birth_date,discord_username) VALUES ($1,$2,$3,$4,$5,$6,$7)  RETURNING *`,
+      `INSERT INTO ${this.tableName} ("firstname", "lastname", "email", "password", "city", "birth_date", "discord_username") 
+      VALUES ($1,$2,$3,$4,$5,$6,$7)  
+      RETURNING *`,
       [
         firstname,
         lastname,
@@ -49,7 +63,7 @@ export default class UserDatamapper extends CoreDatamapper {
         city,
         birth_date,
         discord_username,
-      ]
+      ],
     );
     const { rows } = result;
     return rows[0];
@@ -65,7 +79,7 @@ export default class UserDatamapper extends CoreDatamapper {
       JOIN "rate" ON "rate"."receiver_profil_id" = "profil"."id"
       WHERE "users"."id" = $1
       `,
-      [id]
+      [id],
     );
 
     return rows;

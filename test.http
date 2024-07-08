@@ -3,31 +3,47 @@ GET http://localhost:3000/api/v1/games
 
 GET http://localhost:3000/api/v1/posts/1
 
+###
+POST http://localhost:3000/api/v1/posts
+Content-Type: application/json
 
+{
+  "title": "New Gaming Event",
+  "platform": "PC",
+  "description": "Join us for an exciting new gaming event!",
+  "schedule_start": "2024-07-10T14:00:00Z",
+  "schedule_end": "2024-07-10T16:00:00Z",
+  "user_id": 1,
+  "game_id": 2,
+  "status": true
+}
+
+
+###
 @endpoint=http://localhost:3000/api/v1
 
 ###get all users
 GET {{endpoint}}/users
 
 ### get one user
-GET {{endpoint}}/users/1
+GET {{endpoint}}/users/145643
 
 ### Create a user
 POST http://localhost:3000/api/v1/users
 Content-Type: application/json
 
 {
-"firstname": "Alexandzere1",
-"lastname": "Hazmed1",
-"email": "bla@bla",
-"password": "mdp",
-"birth_date": "1990-05-14T22:00:00.000Z",
+"firstname": "Alexandre",
+"lastname": "Hazmed",
+"email": "bla@bljjga",
+"password": "Testtest1.",
+"birth_date": "1990-05-14",
 "discord_username": "JohnaDoe#1234",
 "city": "Noisy-lee-roi"
 }
 
 ### Update a user
-PATCH http://localhost:3000/api/v1/users/4
+PATCH http://localhost:3000/api/v1/users/30
 Content-Type: application/json
 
 {
@@ -35,7 +51,7 @@ Content-Type: application/json
 }
 
 ### delete user
-DELETE http://localhost:3000/api/v1/users/2
+DELETE http://localhost:3000/api/v1/users/4
 
 ###
 
@@ -52,9 +68,9 @@ Content-Type: application/json
   "name": "New Gamer",
   "description": "New player in League of Legends",
   "rank": "Silver",
-  "level": 10,
+  "level": 3,
   "game_id": 2,
-  "user_id": 2
+  "user_id": 3
 }
 ### Test PATCH request for updating a profil
 PUT http://localhost:3000/api/v1/profil/1 HTTP/1.1
@@ -65,19 +81,17 @@ Content-Type: application/json
  
 }
 
-
-### Test login user
+### Authentification et récupération du jeton
+# @name login
 POST http://localhost:3000/api/v1/login
 Content-Type: application/json
 
 {
-  "email": "bla@bla",
+  "email": "bla@bljjgadsdsedd",
   "password": "mdp"
 }
 
-###
+### delete rates/id
 DELETE http://localhost:3000/api/v1/rates/1
-Authorization: Bearer 
-
-### Get user datails
-GET http://localhost:3000/api/v1/users/4/details
+Content-Type: application/json
+Authorization: Bearer {{login.response.body.token}}

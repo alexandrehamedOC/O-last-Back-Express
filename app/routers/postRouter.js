@@ -1,5 +1,7 @@
 import express from 'express';
 import PostController from '../controllers/post.controller.js';
+import { postSchema } from '../utils/validationSchemas.js';
+import validationMiddleware from '../middleware/validation.middleware.js';
 
 const router = express.Router();
 
@@ -115,7 +117,9 @@ const router = express.Router();
  */
 router.route('/posts')
   .get(PostController.getAll.bind(PostController))
-  .post(PostController.create.bind(PostController));
+  .post(
+    validationMiddleware(postSchema),
+    PostController.createpost.bind(PostController));
 
 /**
  * @swagger
@@ -184,7 +188,9 @@ router.route('/posts')
  */
 router.route('/posts/:id')
   .get(PostController.getOne.bind(PostController))
-  .patch(PostController.update.bind(PostController))
+  .patch(
+    validationMiddleware(postSchema),
+    PostController.update.bind(PostController))
   .delete(PostController.delete.bind(PostController));
 
 /**

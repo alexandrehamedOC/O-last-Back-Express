@@ -1,7 +1,10 @@
-export default class ApiError extends Error {
-  constructor(statusCode, message) {
-    super();
+class ApiError extends Error {
+  constructor(message, statusCode = 500, code = 'INTERNAL_SERVER_ERROR') {
+    super(message);
     this.statusCode = statusCode;
-    this.message = message;
+    this.code = code;
+    Error.captureStackTrace(this, this.constructor);
   }
 }
+
+export default ApiError;

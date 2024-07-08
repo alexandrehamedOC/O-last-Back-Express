@@ -9,7 +9,7 @@ PostDatamapper.init({ client });
 GameDatamapper.init({ client });
 RateDatamapper.init({ client });
 UserDatamapper.init({ client });
-ProfilDatamapper.init({ client })
+ProfilDatamapper.init({ client });
 
 
 /**export datamapper here */

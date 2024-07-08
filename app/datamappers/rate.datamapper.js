@@ -10,8 +10,8 @@ export default class RateDatamapper extends CoreDatamapper {
 "rate"."id" as "rate_id", 
 "note", 
 "rate"."description" as "rate_description", 
-"user"."firstname" as "user_firstname",
-"user"."lastname" as "user_lastname",  
+"users"."firstname" as "user_firstname",
+"users"."lastname" as "user_lastname",  
 "game"."name" as "game_name", 
 "profil"."description" as "profil_description",
 "profil"."rank" as "profil_rank",
@@ -19,7 +19,7 @@ export default class RateDatamapper extends CoreDatamapper {
 "rate"."sender_user_id" as "rate_sender_user_id"
 FROM "${this.tableName}"
 JOIN "profil" ON "profil"."id" = "rate"."receiver_profil_id"
-JOIN "user" ON "profil"."user_id" = "user"."id"
+JOIN "users" ON "profil"."user_id" = "users"."id"
 JOIN "game" ON "profil"."game_id" = "game"."id"
 WHERE "rate"."receiver_profil_id" =$1;
       `,
