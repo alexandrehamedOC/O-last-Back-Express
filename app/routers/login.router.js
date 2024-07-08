@@ -109,9 +109,79 @@ const router = express.Router();
 
 router.route("/login").post(UserController.getLogUser.bind(UserController));
 
+
+
+/**
+ * @swagger
+ * /forgot-password:
+ *   post:
+ *     summary: Envoie un e-mail de réinitialisation de mot de passe
+ *     tags: [Users]
+ *     requestBody:
+ *       required: true
+ *       content:
+ *         application/json:
+ *           schema:
+ *             type: object
+ *             required:
+ *               - email
+ *             properties:
+ *               email:
+ *                 type: string
+ *                 format: email
+ *                 description: L'adresse e-mail de l'utilisateur pour recevoir le lien de réinitialisation
+ *             example:
+ *               email: "john.doe@example.com"
+ *     responses:
+ *       200:
+ *         description: E-mail de réinitialisation envoyé
+ *       400:
+ *         description: Adresse e-mail non trouvée
+ *       500:
+ *         description: Erreur serveur
+ */
+
 router
   .route("/forgot-password")
   .post(UserController.resetPassword.bind(UserController));
+
+
+/**
+ * @swagger
+ * /forgot-password/{token}:
+ *   post:
+ *     summary: Réinitialise le mot de passe de l'utilisateur
+ *     tags: [Users]
+ *     parameters:
+ *       - in: path
+ *         name: token
+ *         schema:
+ *           type: string
+ *         required: true
+ *         description: Jeton JWT pour la réinitialisation du mot de passe
+ *     requestBody:
+ *       required: true
+ *       content:
+ *         application/json:
+ *           schema:
+ *             type: object
+ *             required:
+ *               - password
+ *             properties:
+ *               password:
+ *                 type: string
+ *                 format: password
+ *                 description: Le nouveau mot de passe de l'utilisateur
+ *             example:
+ *               password: "newpassword123"
+ *     responses:
+ *       200:
+ *         description: Mot de passe réinitialisé avec succès
+ *       400:
+ *         description: Token invalide ou utilisateur inconnu
+ *       500:
+ *         description: Erreur serveur
+ */
 
 router
   .route("/forgot-password/:token")
