@@ -109,6 +109,9 @@ router.route("/profil")
     validationMiddleware(profilSchema),
     ProfilController.create.bind(ProfilController));
 
+router.route("/profil/details/:id")
+  .get(ProfilController.getOne.bind(ProfilController));
+
 /**
  * @swagger
  * /profil/{id}:
