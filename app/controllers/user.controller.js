@@ -16,7 +16,8 @@ export default class UserController extends CoreController{
       if(!result){
         return next(new ApiError(`${this.entityName} not found`, 404, 'NOT_FOUND'));
       };
-      const token = jwt.sign({email} , process.env.TOKEN_SECRET, { expiresIn: '2h' });
+      const userId = result.id;
+      const token = jwt.sign({email: email, userId: userId} , process.env.TOKEN_SECRET, { expiresIn: '2h' });
       const userid = result.id;
       res.send({token, userid});
     } catch (error) {
