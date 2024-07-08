@@ -5,7 +5,7 @@ const validationMiddleware = (schema) => {
   return (req, res, next) => {
     const { error } = schema.validate(req.body);
     if (error) {
-      return next(new ApiError(error.details[0].message, { status: 400 }));
+      return next(new ApiError(error.details[0].message, 400, 'BAD_REQUEST'));
     }
     next();
   };

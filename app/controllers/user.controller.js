@@ -17,17 +17,14 @@ export default class UserController extends CoreController{
         return next(new ApiError(`${this.entityName} not found`, 404, 'NOT_FOUND'));
       };
       const token = jwt.sign({email} , process.env.TOKEN_SECRET, { expiresIn: '2h' });
-      res.cookie('token', token, {httpOnly: true}).json({user: result.id});
-      console.log(result);
-      console.log(token);
+      const userid = result.id;
+      res.send({token, userid});
     } catch (error) {
       console.error(error);
       return next(new ApiError());
     }
   }
 
-
-  }
   static async getUserDetails(req, res, next){
     const {id} = req.params;
     try {
