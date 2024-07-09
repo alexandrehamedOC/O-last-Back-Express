@@ -35,4 +35,18 @@ export default class PostController extends CoreController{
     }
   }
 
+  static async showPosts(req, res){
+    try {
+      const rows = await this.mainDatamapper.getPostsWithProfils();
+
+      if (!rows) {
+        throw new ApiError('Posts not found', 404, 'NOT_FOUND');
+      };
+      return res.json( rows );
+    } catch (error) {
+      console.error(error);
+      throw new ApiError();
+    }
+  }
+
 }

@@ -1,7 +1,7 @@
 GET http://localhost:3000/api/v1/games
 ###
 
-GET http://localhost:3000/api/v1/posts/1
+GET http://localhost:3000/api/v1/posts
 
 
 @endpoint=http://localhost:3000/api/v1
@@ -19,11 +19,26 @@ Content-Type: application/json
 {
 "firstname": "Alexandzere1",
 "lastname": "Hazmed1",
-"email": "alexandrehamed@hotmail.fr",
-"password": "mdp",
+"email": "test@test.com",
+"password": "Testtest1.",
 "birth_date": "1990-05-14T22:00:00.000Z",
 "discord_username": "JohnaDoe#1234",
 "city": "Noisy-lee-roi"
+}
+
+### Create a user
+POST http://localhost:3000/api/v1/posts
+Content-Type: application/json
+
+{
+"title": "Tryharder solide pour exploser des lobbys",
+"platform": "PC",
+"description": "go kill du noob",
+"schedule_start": "2024-07-13T22:00:00.000Z",
+"schedule_end": "2024-07-14T22:00:00.000Z",
+"status": true,
+"user_id": "2",
+"game_id": 1
 }
 
 ### Update a user
@@ -62,7 +77,6 @@ Content-Type: application/json
 
 {
   "name": "Updated Gamer"
- 
 }
 
 
@@ -71,8 +85,8 @@ POST http://localhost:3000/api/v1/login
 Content-Type: application/json
 
 {
-  "email": "bla@bla",
-  "password": "mdp"
+  "email": "test@test.com",
+  "password": "Testtest1."
 }
 
 ###

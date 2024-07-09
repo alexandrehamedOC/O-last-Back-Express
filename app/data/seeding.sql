@@ -29,7 +29,7 @@ VALUES
 ('COD Specialist', 'Expert in zombies mode', 'Prestige', 70, 4, 4);
 
 -- Insertion des posts
-INSERT INTO "post" ("title", "platform", "description", "schedule_start", "schedule_end", "status", "user_id", "game_id")
+INSERT INTO "post" ("title", "platform", "description", "schedule_start", "schedule_end", "status", "profil_id", "game_id")
 VALUES
 ('Looking for duo', 'PC', 'Looking for a duo partner in League of Legends', '2024-07-01 18:00:00', '2024-07-01 20:00:00', TRUE, 1, 1),
 ('Squad needed', 'PC', 'Need a squad for Fortnite', '2024-07-02 19:00:00', '2024-07-02 21:00:00', TRUE, 2, 2),

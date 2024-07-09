@@ -116,7 +116,7 @@ const router = express.Router();
  *         description: Erreur de validation
  */
 router.route('/posts')
-  .get(PostController.getAll.bind(PostController))
+  .get(PostController.showPosts.bind(PostController))
   .post(
     validationMiddleware(postSchema),
     PostController.createpost.bind(PostController));
