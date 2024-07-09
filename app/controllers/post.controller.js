@@ -11,7 +11,7 @@ export default class PostController extends CoreController{
       const input = req.body;
       const post = await this.mainDatamapper.create(input);
 
-      return res.status(201).json({ data: post });
+      return res.status(201).json({ data: post, message: `Post ${post.id} created` });
     } catch (error) {
       console.error(error);
       return next(new ApiError());
