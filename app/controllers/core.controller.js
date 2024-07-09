@@ -7,10 +7,18 @@ export default class CoreController {
     return validationMiddleware(schema);
   }
 
-  static async getAll(_, res) {
+  static async getAll(req, res) {
+    const {itemsByPage, page} = req.query;
+
+    const itemsPerPage = Number(itemsByPage);
+    const currentPage = Number(page);
+
+    if (isNaN(itemsPerPage) || isNaN(currentPage)) {
+      return res.status(400).json({ error: 'Invalid pagination parameters' });
+    }
 
     try{
-      const rows = await this.mainDatamapper.findAll();
+      const rows = await this.mainDatamapper.findAll(itemsPerPage, currentPage);
 
       if (!rows) {
         throw new ApiError(`${this.entityName} not found`, 404, 'NOT_FOUND');

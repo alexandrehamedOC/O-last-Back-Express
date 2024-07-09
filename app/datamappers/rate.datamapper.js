@@ -3,7 +3,7 @@ import CoreDatamapper from './core.datamapper.js';
 export default class RateDatamapper extends CoreDatamapper {
   static tableName = 'rate';
 
-  static async getAllByUser(userId) {
+  static async getAllByUser(userId,itemsPerPage, currentPage) {
     const { rows } = await this.client.query(
       `
       SELECT 
@@ -21,9 +21,9 @@ FROM "${this.tableName}"
 JOIN "profil" ON "profil"."id" = "rate"."receiver_profil_id"
 JOIN "users" ON "profil"."user_id" = "users"."id"
 JOIN "game" ON "profil"."game_id" = "game"."id"
-WHERE "rate"."receiver_profil_id" =$1;
+WHERE "rate"."receiver_profil_id" =$1 LIMIT $2 OFFSET $3;
       `,
-      [userId],
+      [userId,itemsPerPage, currentPage],
     );
     return rows[0];
   }
