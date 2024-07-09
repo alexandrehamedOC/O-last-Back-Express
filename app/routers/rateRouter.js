@@ -182,12 +182,26 @@ router.route('/rates/:id')
  *     summary: Retourne les notes d'un utilisateur par ID
  *     tags: [Rates]
  *     parameters:
- *       - in: path
+  *       - in: path
  *         name: userId
  *         schema:
  *           type: integer
  *         required: true
  *         description: L'identifiant de l'utilisateur dont les notes sont récupérées
+ *       - in: query
+ *         name: itemsByPage
+ *         schema:
+ *           type: integer
+ *           default: 10
+ *         required: false
+ *         description: Nombre de notes par page
+ *       - in: query
+ *         name: page
+ *         schema:
+ *           type: integer
+ *           default: 1
+ *         required: false
+ *         description: Numéro de la page des résultats
  *     responses:
  *       200:
  *         description: Liste des notes pour l'utilisateur spécifié
