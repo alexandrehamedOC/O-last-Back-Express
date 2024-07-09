@@ -178,7 +178,7 @@ router.route("/profil/details/:id")
  */
 router.route("/profil/:id")
   .get(ProfilController.getOne.bind(ProfilController))
-  .put(
+  .patch(
     authMiddleware.verifyToken, validationMiddleware(profilSchema), ProfilController.update.bind(ProfilController))
   .delete(
     authMiddleware.verifyToken, ProfilController.delete.bind(ProfilController));
