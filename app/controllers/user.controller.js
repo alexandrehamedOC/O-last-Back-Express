@@ -1,4 +1,4 @@
-import { UserDatamapper } from "../datamappers/index.datamapper.js";
+import { UserDatamapper }   from "../datamappers/index.datamapper.js";
 import { userSchema } from "../utils/validationSchemas.js";
 import CoreController from "./core.controller.js";
 import ApiError from "../errors/api.errors.js";
