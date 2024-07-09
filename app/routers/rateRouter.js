@@ -97,8 +97,7 @@ const router = express.Router();
 router.route('/rates')
   .get(RateController.getAll.bind(RateController))
   .post(
-    validationMiddleware(rateSchema),
-    RateController.createRate.bind(RateController));
+    authMiddleware.verifyToken, validationMiddleware(rateSchema), RateController.createRate.bind(RateController));
 
 
 
@@ -171,9 +170,9 @@ router.route('/rates')
 router.route('/rates/:id')
   .get(RateController.getOne.bind(RateController))
   .patch(
-    validationMiddleware(rateSchema),
-    RateController.update.bind(RateController))
-  .delete(authMiddleware.verifyToken, RateController.delete.bind(RateController));
+    authMiddleware.verifyToken, validationMiddleware(rateSchema), RateController.update.bind(RateController))
+  .delete(
+    authMiddleware.verifyToken, RateController.delete.bind(RateController));
 
 /**
  * @swagger
