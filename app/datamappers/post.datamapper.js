@@ -19,7 +19,8 @@ export default class PostDatamapper extends CoreDatamapper {
   static async getPostsWithProfils() {
     const result = await this.client.query(
       `
-        SELECT  
+        SELECT
+        "post"."id" as "post_id",  
         "post"."title" as "post_title",
         "post"."platform" as "post_platform",
         "post"."description" as "post_description",
@@ -30,9 +31,11 @@ export default class PostDatamapper extends CoreDatamapper {
         "profil"."rank" as "profil_rank",
         "profil"."level" as "profil_level",
         "post"."profil_id" as "profil_id",
-        "post"."game_id" as "game_id"
+        "post"."game_id" as "game_id",
+        "users"."id" as "user_id"
         FROM "${this.tableName}"
         JOIN "profil" ON "${this.tableName}"."profil_id" = "profil"."id"
+        JOIN "users" ON "profil"."user_id" = "users"."id"
         JOIN "game" ON "${this.tableName}"."game_id" = "game"."id"
         `,
     );
