@@ -1,6 +1,7 @@
 import express from "express";
 import UserController from "../controllers/user.controller.js";
 import { userSchema } from "../utils/validationSchemas.js";
+import authMiddleware from "../middleware/auth.middleware.js";
 import validationMiddleware from "../middleware/validation.middleware.js"; // Assurez-vous que le chemin est correct
 
 const router = express.Router();
@@ -188,9 +189,9 @@ router.route("/")
 
 router.route("/:id")
   .get(UserController.getOne.bind(UserController))
-  .delete(UserController.delete.bind(UserController))
+  .delete(authMiddleware.verifyToken, UserController.delete.bind(UserController))
   .patch(
-    validationMiddleware(userSchema), // Utilisez la méthode statique directement
+    authMiddleware.verifyToken, validationMiddleware(userSchema), // Utilisez la méthode statique directement
     UserController.update.bind(UserController),
   );
 
