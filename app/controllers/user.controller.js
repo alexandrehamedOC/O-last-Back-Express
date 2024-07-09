@@ -21,10 +21,11 @@ export default class UserController extends CoreController {
       const userId = result.id;
       const token = jwt.sign({email: email, userId: userId} , process.env.TOKEN_SECRET, { expiresIn: '2h' });
       res.cookie('token', token, {httpOnly: true});
-      res.json({userId: userId});
+      res.json(userId);
     } catch (error) {
-      console.error(error);
-      return next(new ApiError());
+      // console.error(error);
+      // return next(new ApiError());
+      next(error);
     }
   }
 
@@ -77,7 +78,7 @@ export default class UserController extends CoreController {
       const tokenPassword = jwt.sign(
         { email: user.email },
         process.env.TOKEN_SECRET,
-        { expiresIn: "2h" }
+        { expiresIn: "2h" },
       );
 
       const transporter = nodemailer.createTransport({
@@ -99,9 +100,12 @@ export default class UserController extends CoreController {
       };
 
       const testMail = await transporter.sendMail(mailOptions);
+      if (!testMail) {
+        return res.status(400).send("Erreur lors de l'envoi du mail");
+      }
       res.status(200).send("Un email a été envoyé");
     } catch (err) {
-      res.status(500).send("Error on the server.");
+      res.status(500).send("Error on the server :", err.message);
     }
   }
   static async submitNewPassword(req, res) {
@@ -117,15 +121,18 @@ export default class UserController extends CoreController {
         return res.status(400).send("Token invalid ou utilisateur inconnu");
       }
       const saltRound = 10;
-      console.log(password)
+      console.log(password);
 
 
       const newHashedPassword = await bcrypt.hash(password, saltRound);
 
       const result = await UserDatamapper.updatePassword(
         newHashedPassword,
-        email
+        email,
       );
+      if (!result) {
+        return res.status(400).send("Erreur lors de la mise à jour du mot de passe");
+      }
       res.status(200).send("mot de passe modifié avec succès");
     } catch (error) {
       console.log(error);

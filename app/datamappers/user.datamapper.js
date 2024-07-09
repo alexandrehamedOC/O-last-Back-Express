@@ -1,47 +1,43 @@
 import CoreDatamapper from "./core.datamapper.js";
 import bcrypt from "bcryptjs";
+import ApiError from "../errors/api.errors.js";
 
 export default class UserDatamapper extends CoreDatamapper {
   static tableName = "users";
 
   static async findUser(email, password) {
-    try {
-      const result = await this.client.query(
-        `SELECT * FROM "users" WHERE "email" =$1`,
-        [email]
-      );
-      const user = result.rows[0];
 
-      if (!user) {
-        return null;
-      }
-      const isMatch = await bcrypt.compare(password, user.password);
-      console.log(isMatch);
-      if (isMatch) {
-        return user;
-      } else {
-        return null;
-      }
-    } catch (error) {
-      throw error;
+    const result = await this.client.query(
+      `SELECT * FROM "users" WHERE "email" =$1`,
+      [email],
+    );
+    const user = result.rows[0];
+
+    if (!user) {
+      throw new ApiError('Email not found', 404, 'USER_NOT_FOUND');
     }
+    const isMatch = await bcrypt.compare(password, user.password);
+    console.log(isMatch);
+    if (isMatch === false) {
+      throw new ApiError('Password not match', 401, 'PASSWORD_NOT_MATCH');
+    }
+
+    return user;
   }
+
   static async getUserByMail(email) {
-    try {
-      const result = await this.client.query(
-        `SELECT * FROM "users" WHERE "email" =$1`,
-        [email]
-      );
-      const user = result.rows[0];
+    const result = await this.client.query(
+      `SELECT * FROM "users" WHERE "email" =$1`,
+      [email],
+    );
+    const user = result.rows[0];
 
-      if (!user) {
-        return null;
-      }
-      return user;
-    } catch (error) {
-      throw error;
+    if (!user) {
+      return null;
     }
+    return user;
   }
+
 
   static async findByEmail(email) {
     console.log(email);
@@ -105,7 +101,7 @@ export default class UserDatamapper extends CoreDatamapper {
   static async updatePassword(newPassword, email) {
     const result = this.client.query(
       `UPDATE users SET password = $1 WHERE email = $2`,
-      [newPassword, email]
+      [newPassword, email],
     );
     const { rows } = result;
     return rows;

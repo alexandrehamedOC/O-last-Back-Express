@@ -10,5 +10,9 @@ Content-Type: application/json
 }
 
 ### Test POST request for creating a rate
-GET http://localhost:3000/api/v1/profil/details/4
+GET http://localhost:3000/api/v1/profil/details/2
+Content-Type: application/json  
+
+### Test POST request for creating a rate
+GET http://localhost:3000/api/v1/games
 Content-Type: application/json  
