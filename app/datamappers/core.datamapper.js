@@ -6,7 +6,11 @@ export default class CoreDatamapper {
   }
 
   static async findAll(itemsPerPage, currentPage) {
-    const result = await this.client.query(`SELECT * FROM "${this.tableName}" ORDER BY id ASC LIMIT $1 OFFSET $2`, [itemsPerPage, currentPage]);
+    const offset = currentPage * itemsPerPage;
+    const result = await this.client.query(
+      `SELECT * FROM "${this.tableName}" ORDER BY id ASC LIMIT $1 OFFSET $2`,
+      [itemsPerPage, offset]
+    );
     const { rows } = result;
     return rows;
   }

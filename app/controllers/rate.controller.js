@@ -21,8 +21,9 @@ export default class PostController extends CoreController{
     const {userId } = req.params;
     const {itemsByPage, page} = req.query;
 
-    const itemsPerPage = Number(itemsByPage);
-    const currentPage = Number(page);
+    const itemsPerPage = Number(itemsByPage) && Number(itemsByPage) > 0 ? Number(itemsByPage) : 50;
+    const currentPage = Number(page) && Number(page) >= 0 ? Number(page) : 0;
+  
 
 
     try {

@@ -1,5 +1,5 @@
-import ApiError from '../errors/api.errors.js';
-import  validationMiddleware  from '../middleware/validation.middleware.js';
+import ApiError from "../errors/api.errors.js";
+import validationMiddleware from "../middleware/validation.middleware.js";
 export default class CoreController {
   static entityName = null;
   static mainDatamapper = null;
@@ -8,28 +8,24 @@ export default class CoreController {
   }
 
   static async getAll(req, res) {
-    const {itemsByPage, page} = req.query;
+    const { itemsByPage, page } = req.query;
 
-    const itemsPerPage = Number(itemsByPage);
-    const currentPage = Number(page);
+    const itemsPerPage = Number(itemsByPage) && Number(itemsByPage) > 0 ? Number(itemsByPage) : 50;
+    const currentPage = Number(page) && Number(page) >= 0 ? Number(page) : 0;
+  
 
-    if (isNaN(itemsPerPage) || isNaN(currentPage)) {
-      return res.status(400).json({ error: 'Invalid pagination parameters' });
-    }
-
-    try{
+    try {
       const rows = await this.mainDatamapper.findAll(itemsPerPage, currentPage);
 
       if (!rows) {
-        throw new ApiError(`${this.entityName} not found`, 404, 'NOT_FOUND');
+        throw new ApiError(`${this.entityName} not found`, 404, "NOT_FOUND");
       }
-      return res.json( rows );
-
+      return res.json(rows);
     } catch (error) {
       console.log(error);
       throw new ApiError();
     }
-  };
+  }
 
   static async getOne(req, res) {
     const { id } = req.params;
@@ -38,54 +34,52 @@ export default class CoreController {
       const row = await this.mainDatamapper.findByPk(id);
 
       if (!row) {
-        throw new ApiError(`${this.entityName} not found`, 404, 'NOT_FOUND');
+        throw new ApiError(`${this.entityName} not found`, 404, "NOT_FOUND");
       }
 
-      return res.json( row );
-    }
-    catch (error) {
+      return res.json(row);
+    } catch (error) {
       console.error(error);
       throw new ApiError();
     }
-  };
+  }
 
   static async create(req, res) {
     const input = req.body;
 
     try {
       if (!input) {
-        throw new ApiError('All fields required', 400, 'BAD_REQUEST');
+        throw new ApiError("All fields required", 400, "BAD_REQUEST");
       }
 
       const row = await this.mainDatamapper.create(input);
-      return res.status(201).json( row );
-    }
-    catch (error) {
+      return res.status(201).json(row);
+    } catch (error) {
       console.error(error);
       throw new ApiError();
     }
-  };
+  }
 
   static async update(req, res, next) {
     const { id } = req.params;
     const input = req.body;
     try {
       if (!input) {
-        return next(new ApiError('All fields required', 400, 'BAD_REQUEST'));
+        return next(new ApiError("All fields required", 400, "BAD_REQUEST"));
       }
 
       const row = await this.mainDatamapper.update(id, input);
       if (!row) {
         return next(
-          new ApiError(`${this.entityName} not found`, { status: 404 }),
+          new ApiError(`${this.entityName} not found`, { status: 404 })
         );
       }
-      return res.json( row );
+      return res.json(row);
     } catch (error) {
       console.error(error);
       throw new ApiError();
     }
-  };
+  }
 
   static async delete(req, res, next) {
     const { id } = req.params;
@@ -94,15 +88,14 @@ export default class CoreController {
 
       if (!eltToDelete) {
         return next(
-          new ApiError(`${this.entityName} not found`, { status: 404 }),
+          new ApiError(`${this.entityName} not found`, { status: 404 })
         );
       }
 
-      res.status(204).json({message: `${this.entityName} deleted`});
-    }
-    catch (error) {
+      res.status(204).json({ message: `${this.entityName} deleted` });
+    } catch (error) {
       console.error(error);
       throw new ApiError();
     }
-  };
-};
+  }
+}

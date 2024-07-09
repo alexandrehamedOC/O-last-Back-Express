@@ -75,6 +75,21 @@ const router = express.Router();
  *   get:
  *     summary: Retourne la liste de tous les profils
  *     tags: [Profils]
+ *     parameters:
+ *       - in: query
+ *         name: itemsByPage
+ *         schema:
+ *           type: integer
+ *           default: 20
+ *         required: false
+ *         description: Nombre d'éléments par page
+ *       - in: query
+ *         name: page
+ *         schema:
+ *           type: integer
+ *           default: 0
+ *         required: false
+ *         description: Numéro de la page
  *     responses:
  *       200:
  *         description: La liste des profils
@@ -103,6 +118,7 @@ const router = express.Router();
  *       400:
  *         description: Erreur de validation
  */
+
 router.route("/profil")
   .get(ProfilController.getAll.bind(ProfilController))
   .post(

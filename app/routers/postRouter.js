@@ -88,6 +88,21 @@ const router = express.Router();
  *   get:
  *     summary: Retourne la liste de tous les posts
  *     tags: [Posts]
+ *     parameters:
+ *       - in: query
+ *         name: itemsByPage
+ *         schema:
+ *           type: integer
+ *           default: 20
+ *         required: false
+ *         description: Nombre d'éléments par page
+ *       - in: query
+ *         name: page
+ *         schema:
+ *           type: integer
+ *           default: 0
+ *         required: false
+ *         description: Numéro de la page
  *     responses:
  *       200:
  *         description: La liste des posts
@@ -116,8 +131,9 @@ const router = express.Router();
  *       400:
  *         description: Erreur de validation
  */
+
 router.route('/posts')
-  .get(PostController.showPosts.bind(PostController))
+  .get(PostController.getAll.bind(PostController))
   .post(
     authMiddleware.verifyToken, validationMiddleware(postSchema), PostController.createpost.bind(PostController));
 
