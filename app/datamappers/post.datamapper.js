@@ -7,7 +7,8 @@ export default class PostDatamapper extends CoreDatamapper {
     const result = await this.client.query(
       `
         SELECT * FROM "${this.tableName}"
-        JOIN "users" ON "${this.tableName}"."user_id" = "users"."id"
+        JOIN "profil" ON "${this.tableName}"."profil_id" = "profil"."id"
+        JOIN "users" ON "profil"."user_id" = "users"."id"
         WHERE "users"."id" = $1
         `,
       [userId],
