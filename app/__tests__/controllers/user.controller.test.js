@@ -6,7 +6,8 @@ import ApiError from '../../errors/api.errors.js';
 jest.mock('../../datamappers/user.datamapper.js', () => ({
 
   createUser: jest.fn(),
-  findByEmail: jest.fn(),
+  findByEmail
+  : jest.fn(),
   findUser: jest.fn(),
   userDetails: jest.fn(),
 }));
