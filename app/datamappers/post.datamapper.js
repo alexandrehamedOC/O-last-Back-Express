@@ -14,6 +14,10 @@ export default class PostDatamapper extends CoreDatamapper {
         "post"."description" as "post_description",
         "post"."schedule_start" as "post_schedule_start",
         "post"."schedule_end" as "post_schedule_end",
+        "post"."status" as "post_status",
+        "profil"."id" as "profil_id",
+        "profil"."rank" as "profil_rank",
+        "profil"."level" as "profil_level",
         "users"."id" as "user_id"
       FROM "post"
       JOIN "profil" ON "post"."profil_id" = "profil"."id"
