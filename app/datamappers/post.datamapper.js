@@ -16,7 +16,8 @@ export default class PostDatamapper extends CoreDatamapper {
     return rows;
   }
 
-  static async getPostsWithProfils() {
+  static async getPostsWithProfils(itemsPerPage, currentPage) {
+    const offset = itemsPerPage * currentPage;
     const result = await this.client.query(
       `
         SELECT  
@@ -33,8 +34,8 @@ export default class PostDatamapper extends CoreDatamapper {
         "post"."game_id" as "game_id"
         FROM "${this.tableName}"
         JOIN "profil" ON "${this.tableName}"."profil_id" = "profil"."id"
-        JOIN "game" ON "${this.tableName}"."game_id" = "game"."id"
-        `,
+        JOIN "game" ON "${this.tableName}"."game_id" = "game"."id" LIMIT $1 OFFSET $2
+        `,[itemsPerPage, offset]
     );
     const { rows } = result;
     return rows;
