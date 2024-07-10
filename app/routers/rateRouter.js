@@ -115,7 +115,7 @@ router
   .post(
     authMiddleware.verifyToken,
     validationMiddleware(rateSchema),
-    RateController.createRate.bind(RateController)
+    RateController.createRate.bind(RateController),
   );
 
 /**
@@ -190,11 +190,11 @@ router
   .patch(
     authMiddleware.verifyToken,
     validationMiddleware(rateSchema),
-    RateController.update.bind(RateController)
+    RateController.update.bind(RateController),
   )
   .delete(
     authMiddleware.verifyToken,
-    RateController.delete.bind(RateController)
+    RateController.delete.bind(RateController),
   );
 
 /**

@@ -133,7 +133,7 @@ const router = express.Router();
  */
 
 router.route('/posts')
-  .get(PostController.getAll.bind(PostController))
+  .get(PostController.showPosts.bind(PostController))
   .post(
     authMiddleware.verifyToken, validationMiddleware(postSchema), PostController.createpost.bind(PostController));
 
