@@ -11,21 +11,22 @@ export default class UserController extends CoreController {
   static mainDatamapper = UserDatamapper;
   static validateSchema = userSchema;
 
-  static async getLogUser (req, res, next){
-    const {email, password} = req.body;
+  static async getLogUser(req, res, next) {
+    const { email, password } = req.body;
     try {
       const result = await UserDatamapper.findUser(email, password);
-      if(!result){
+      if (!result) {
         return next(new ApiError(`${this.entityName} not found`, 404, 'NOT_FOUND'));
-      };
+      }
       const userId = result.id;
-      const token = jwt.sign({email: email, userId: userId} , process.env.TOKEN_SECRET, { expiresIn: '2h' });
-      res.cookie('token', token, {httpOnly: true});
+      console.log(userId);
+      const token = jwt.sign({ email: email, userId: userId }, process.env.TOKEN_SECRET, { expiresIn: '2h' });
+      console.log(token);
+      res.cookie('token', token, { httpOnly: true});
       res.json(userId);
     } catch (error) {
-      // console.error(error);
-      // return next(new ApiError());
-      next(error);
+      console.error(error);
+      return next(new ApiError());
     }
   }
 
