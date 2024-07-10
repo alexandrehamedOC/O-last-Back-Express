@@ -4,6 +4,8 @@ import CoreDatamapper from '../../datamappers/core.datamapper.js';
 import ApiError from '../../errors/api.errors.js';
 
 jest.mock('../../datamappers/core.datamapper.js', () => ({
+  __esModule: true, // this property makes it work
+  default: 'mockedDefaultExport',
   findAll: jest.fn(),
   findByPk: jest.fn(),
   create: jest.fn(),
@@ -35,7 +37,7 @@ describe ('CoreController', () => {
       const res = mockResponse();
 
       // Mock pour CoreDatamapper.findAll
-      CoreDatamapper.findAll = jest.fn().mockResolvedValue([
+      CoreDatamapper.findAll.mockResolvedValue([
         { id: 1, name: 'John Doe' },
         { id: 2, name: 'Jane Doe' },
       ]);
@@ -59,7 +61,7 @@ describe ('CoreController', () => {
       const res = mockResponse();
 
       // Mock pour CoreDatamapper.findByPk
-      CoreDatamapper.findByPk = jest.fn().mockResolvedValue({ id: 1, name: 'John Doe' });
+      CoreDatamapper.findByPk.mockResolvedValue({ id: 1, name: 'John Doe' });
 
       await CoreController.getOne(req, res, mockNext);
 
