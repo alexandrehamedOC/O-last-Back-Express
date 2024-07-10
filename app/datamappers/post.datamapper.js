@@ -18,9 +18,11 @@ export default class PostDatamapper extends CoreDatamapper {
         "profil"."id" as "profil_id",
         "profil"."rank" as "profil_rank",
         "profil"."level" as "profil_level",
+        "game"."name" as "game_name",
         "users"."id" as "user_id"
       FROM "post"
       JOIN "profil" ON "post"."profil_id" = "profil"."id"
+      JOIN "game" ON "game"."id" = "post"."game_id"
       JOIN "users" ON "profil"."user_id" = "users"."id"
       WHERE "users"."id" =$1
         `,
