@@ -9,7 +9,7 @@ export default class CoreDatamapper {
     const offset = currentPage * itemsPerPage;
     const result = await this.client.query(
       `SELECT * FROM "${this.tableName}" ORDER BY id ASC LIMIT $1 OFFSET $2`,
-      [itemsPerPage, offset]
+      [itemsPerPage, offset],
     );
     const { rows } = result;
     return rows;

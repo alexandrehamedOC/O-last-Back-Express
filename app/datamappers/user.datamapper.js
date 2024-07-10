@@ -17,7 +17,6 @@ export default class UserDatamapper extends CoreDatamapper {
       throw new ApiError('Email not found', 404, 'USER_NOT_FOUND');
     }
     const isMatch = await bcrypt.compare(password, user.password);
-    console.log(isMatch);
     if (isMatch === false) {
       throw new ApiError('Password not match', 401, 'PASSWORD_NOT_MATCH');
     }
@@ -40,7 +39,6 @@ export default class UserDatamapper extends CoreDatamapper {
 
 
   static async findByEmail(email) {
-    console.log(email);
     const result = await this.client.query(
       `SELECT * FROM ${this.tableName} WHERE "email" =$1`,
       [email],
@@ -63,7 +61,6 @@ export default class UserDatamapper extends CoreDatamapper {
     discord_username,
   }) {
     const saltRound = 10;
-    console.log(password);
     const hashedPassword = await bcrypt.hash(password, saltRound);
     const result = await this.client.query(
       `INSERT INTO ${this.tableName} ("firstname", "lastname", "email", "password", "city", "birth_date", "discord_username") 

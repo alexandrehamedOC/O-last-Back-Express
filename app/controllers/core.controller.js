@@ -12,7 +12,7 @@ export default class CoreController {
 
     const itemsPerPage = Number(itemsByPage) && Number(itemsByPage) > 0 ? Number(itemsByPage) : 50;
     const currentPage = Number(page) && Number(page) >= 0 ? Number(page) : 0;
-  
+
 
     try {
       const rows = await this.mainDatamapper.findAll(itemsPerPage, currentPage);
@@ -71,7 +71,7 @@ export default class CoreController {
       const row = await this.mainDatamapper.update(id, input);
       if (!row) {
         return next(
-          new ApiError(`${this.entityName} not found`, { status: 404 })
+          new ApiError(`${this.entityName} not found`, { status: 404 }),
         );
       }
       return res.json(row);
@@ -88,7 +88,7 @@ export default class CoreController {
 
       if (!eltToDelete) {
         return next(
-          new ApiError(`${this.entityName} not found`, { status: 404 })
+          new ApiError(`${this.entityName} not found`, { status: 404 }),
         );
       }
 

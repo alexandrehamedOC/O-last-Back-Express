@@ -14,7 +14,6 @@ export default class ProfilController extends CoreController {
 
     try {
       const profils = await this.mainDatamapper.profilsByUserId(id);
-      console.log(profils);
 
       if (!profils) {
         throw new ApiError("Profils not found", 404, "NOT_FOUND");

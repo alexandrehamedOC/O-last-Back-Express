@@ -23,7 +23,7 @@ export default class PostController extends CoreController{
 
     const itemsPerPage = Number(itemsByPage) && Number(itemsByPage) > 0 ? Number(itemsByPage) : 50;
     const currentPage = Number(page) && Number(page) >= 0 ? Number(page) : 0;
-  
+
 
 
     try {

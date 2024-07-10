@@ -38,7 +38,7 @@ export const postSchema = Joi.object({
   description: Joi.string().required(),
   schedule_start: Joi.date().iso().required(),
   schedule_end: Joi.date().iso().required(),
-  user_id: Joi.number().integer().required(),
+  profil_id: Joi.number().integer().required(),
   game_id: Joi.number().integer().required(),
   status: Joi.boolean().required(),
 });
