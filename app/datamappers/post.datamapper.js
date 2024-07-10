@@ -1,7 +1,7 @@
-import CoreDatamapper from './core.datamapper.js';
+import CoreDatamapper from "./core.datamapper.js";
 
 export default class PostDatamapper extends CoreDatamapper {
-  static tableName = 'post';
+  static tableName = "post";
 
   static async findByUserId(userId) {
     const result = await this.client.query(
@@ -17,7 +17,7 @@ export default class PostDatamapper extends CoreDatamapper {
   }
 
   static async getPostsWithProfils(itemsPerPage, currentPage) {
-    const offset = currentPage * itemsPerPage;
+    const offset = itemsPerPage * currentPage;
     const result = await this.client.query(
       `
         SELECT
