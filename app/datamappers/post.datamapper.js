@@ -1,17 +1,26 @@
-import CoreDatamapper from "./core.datamapper.js";
+import CoreDatamapper from './core.datamapper.js';
 
 export default class PostDatamapper extends CoreDatamapper {
-  static tableName = "post";
+  static tableName = 'post';
 
   static async findByUserId(userId) {
     const result = await this.client.query(
+      // todo : refine with select only needed fields
       `
-        SELECT * FROM "${this.tableName}"
-        JOIN "profil" ON "${this.tableName}"."profil_id" = "profil"."id"
-        JOIN "users" ON "profil"."user_id" = "users"."id"
-        WHERE "users"."id" = $1
+       SELECT 
+        "post"."id" as "post_id",  
+        "post"."title" as "post_title",
+        "post"."platform" as "post_platform",
+        "post"."description" as "post_description",
+        "post"."schedule_start" as "post_schedule_start",
+        "post"."schedule_end" as "post_schedule_end",
+        "users"."id" as "user_id"
+      FROM "post"
+      JOIN "profil" ON "post"."profil_id" = "profil"."id"
+      JOIN "users" ON "profil"."user_id" = "users"."id"
+      WHERE "users"."id" =$1
         `,
-      [userId],
+      [userId]
     );
     const { rows } = result;
     return rows;
@@ -41,7 +50,7 @@ export default class PostDatamapper extends CoreDatamapper {
         JOIN "game" ON "${this.tableName}"."game_id" = "game"."id"
         ORDER BY "post_schedule_start" ASC LIMIT $1 OFFSET $2
         `,
-      [itemsPerPage, offset],
+      [itemsPerPage, offset]
     );
     const { rows } = result;
     return rows;
