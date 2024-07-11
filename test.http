@@ -1,49 +1,48 @@
 GET http://localhost:3000/api/v1/games
 ###
 
-GET http://localhost:3000/api/v1/posts/1
-
-###
-POST http://localhost:3000/api/v1/posts
-Content-Type: application/json
-
-{
-  "title": "New Gaming Event",
-  "platform": "PC",
-  "description": "Join us for an exciting new gaming event!",
-  "schedule_start": "2024-07-10T14:00:00Z",
-  "schedule_end": "2024-07-10T16:00:00Z",
-  "user_id": 1,
-  "game_id": 2,
-  "status": true
-}
+GET http://localhost:3000/api/v1/posts
 
 
-###
 @endpoint=http://localhost:3000/api/v1
 
 ###get all users
 GET {{endpoint}}/users
 
 ### get one user
-GET {{endpoint}}/users/145643
+GET {{endpoint}}/users/1
 
 ### Create a user
 POST http://localhost:3000/api/v1/users
 Content-Type: application/json
 
 {
-"firstname": "Alexandre",
-"lastname": "Hazmed",
-"email": "bla@bljjga",
+"firstname": "Alexandzere1",
+"lastname": "Hazmed1",
+"email": "test@test.com",
 "password": "Testtest1.",
-"birth_date": "1990-05-14",
+"birth_date": "1990-05-14T22:00:00.000Z",
 "discord_username": "JohnaDoe#1234",
 "city": "Noisy-lee-roi"
 }
 
+### Create a user
+POST http://localhost:3000/api/v1/posts
+Content-Type: application/json
+
+{
+"title": "Tryharder solide pour exploser des lobbys",
+"platform": "PC",
+"description": "go kill du noob",
+"schedule_start": "2024-07-13T22:00:00.000Z",
+"schedule_end": "2024-07-14T22:00:00.000Z",
+"status": true,
+"user_id": "2",
+"game_id": 1
+}
+
 ### Update a user
-PATCH http://localhost:3000/api/v1/users/30
+PATCH http://localhost:3000/api/v1/users/4
 Content-Type: application/json
 
 {
@@ -51,7 +50,7 @@ Content-Type: application/json
 }
 
 ### delete user
-DELETE http://localhost:3000/api/v1/users/4
+DELETE http://localhost:3000/api/v1/users/2
 
 ###
 
@@ -68,9 +67,9 @@ Content-Type: application/json
   "name": "New Gamer",
   "description": "New player in League of Legends",
   "rank": "Silver",
-  "level": 3,
+  "level": 10,
   "game_id": 2,
-  "user_id": 3
+  "user_id": 2
 }
 ### Test PATCH request for updating a profil
 PUT http://localhost:3000/api/v1/profil/1 HTTP/1.1
@@ -78,20 +77,37 @@ Content-Type: application/json
 
 {
   "name": "Updated Gamer"
- 
 }
 
-### Authentification et récupération du jeton
-# @name login
+
+### Test login user
 POST http://localhost:3000/api/v1/login
 Content-Type: application/json
 
 {
-  "email": "bla@bljjgadsdsedd",
-  "password": "mdp"
+  "email": "test@test.com",
+  "password": "Testtest1."
 }
 
-### delete rates/id
+###
 DELETE http://localhost:3000/api/v1/rates/1
+Authorization: Bearer 
+
+### Get user datails
+GET http://localhost:3000/api/v1/users/4/details
+
+###forgot password generation de l'url
+POST http://localhost:3000/api/v1/forgot-password
 Content-Type: application/json
-Authorization: Bearer {{login.response.body.token}}
+
+{
+  "email":"alexandrehamed@hotmail.fr"
+}
+
+###new password form submission
+POST http://localhost:3000/api/v1/forgot-password/eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImFsZXhhbmRyZWhhbWVkQGhvdG1haWwuZnIiLCJpYXQiOjE3MjA0NDc1MzMsImV4cCI6MTcyMDQ1NDczM30.nVvbPuAd16XIBGOlXI2puLGAb6vHg_7QL27_D5J99cs
+Content-Type: application/json
+
+{
+  "password": "nvxpasse"
+}

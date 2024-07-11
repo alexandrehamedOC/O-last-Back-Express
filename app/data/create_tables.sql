@@ -28,20 +28,6 @@ CREATE TABLE "game" (
     "updated_at" timestamptz
 );
 
-CREATE TABLE "post" (
-"id" int GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
-"title" TEXT NOT NULL,
-"platform" TEXT NOT NULL,
-"description" TEXT NOT NULL,
-"schedule_start" timestamptz,
-"schedule_end" timestamptz,
-"status" boolean,
-"user_id" int NOT NULL REFERENCES "users"("id") ON DELETE CASCADE,
-"game_id" int NOT NULL REFERENCES "game"("id") ON DELETE CASCADE,
-"created_at" timestamptz NOT NULL DEFAULT now(),
-"updated_at" timestamptz
-);
-
 CREATE TABLE "profil" (
     "id" int GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
     "name" text NOT NULL,
@@ -52,6 +38,20 @@ CREATE TABLE "profil" (
     "user_id" int NOT NULL REFERENCES "users" ("id") ON DELETE CASCADE,
     "created_at" timestamptz NOT NULL DEFAULT now(),
     "updated_at" timestamptz
+);
+
+CREATE TABLE "post" (
+"id" int GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
+"title" TEXT NOT NULL,
+"platform" TEXT NOT NULL,
+"description" TEXT NOT NULL,
+"schedule_start" timestamptz,
+"schedule_end" timestamptz,
+"status" boolean,
+"profil_id" int NOT NULL REFERENCES "profil"("id") ON DELETE CASCADE,
+"game_id" int NOT NULL REFERENCES "game"("id") ON DELETE CASCADE,
+"created_at" timestamptz NOT NULL DEFAULT now(),
+"updated_at" timestamptz
 );
 
 CREATE TABLE "rate" (

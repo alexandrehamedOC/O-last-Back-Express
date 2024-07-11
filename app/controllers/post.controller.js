@@ -1,7 +1,5 @@
 import { PostDatamapper } from "../datamappers/index.datamapper.js";
 import CoreController from "./core.controller.js";
-import { postSchema } from "../utils/validationSchemas.js";
-
 import ApiError from "../errors/api.errors.js";
 
 export default class PostController extends CoreController{
@@ -10,17 +8,14 @@ export default class PostController extends CoreController{
 
   static async createpost(req, res, next) {
     try {
-      const { error } = postSchema.validate(req.body);
-      if (error) {
-        return res.status(400).json({ error: error.details });
-      }
-
       const input = req.body;
       const post = await this.mainDatamapper.create(input);
-      return res.status(201).json({ data: post });
+
+      return res.status(201).json({ data: post, message: `Post ${post.id} created` });
     } catch (error) {
       console.error(error);
-      return next(new ApiError('Internal server error', { status: 500 }));
+      return next(new ApiError());
+
     }
   }
 
@@ -33,6 +28,24 @@ export default class PostController extends CoreController{
         throw new ApiError('Posts not found', 404, 'NOT_FOUND');
       };
 
+      return res.json( rows );
+    } catch (error) {
+      console.error(error);
+      throw new ApiError();
+    }
+  }
+
+  static async showPosts(req, res){
+    const { itemsByPage, page } = req.query;
+
+    const itemsPerPage = Number(itemsByPage) && Number(itemsByPage) > 0 ? Number(itemsByPage) : 50;
+    const currentPage = Number(page) && Number(page) >= 0 ? Number(page) : 0;
+    try {
+      const rows = await this.mainDatamapper.getPostsWithProfils(itemsPerPage, currentPage);
+
+      if (!rows) {
+        throw new ApiError('Posts not found', 404, 'NOT_FOUND');
+      };
       return res.json( rows );
     } catch (error) {
       console.error(error);

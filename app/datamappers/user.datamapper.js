@@ -1,32 +1,44 @@
 import CoreDatamapper from "./core.datamapper.js";
 import bcrypt from "bcryptjs";
+import ApiError from "../errors/api.errors.js";
 
 export default class UserDatamapper extends CoreDatamapper {
   static tableName = "users";
 
   static async findUser(email, password) {
-    console.log(email, password);
+
     const result = await this.client.query(
-      `SELECT * FROM ${this.tableName} WHERE "email" =$1`,
+      `SELECT * FROM "users" WHERE "email" =$1`,
       [email],
     );
     const user = result.rows[0];
 
-    if(!user){
-      return null;
+    if (!user) {
+      throw new ApiError('Email not found', 404, 'USER_NOT_FOUND');
     }
     const isMatch = await bcrypt.compare(password, user.password);
-    console.log(isMatch);
-    if (isMatch){
-      return user;
+    if (isMatch === false) {
+      throw new ApiError('Password not match', 401, 'PASSWORD_NOT_MATCH');
     }
-    else{
-      return null;
-    }
+
+    return user;
   }
 
+  static async getUserByMail(email) {
+    const result = await this.client.query(
+      `SELECT * FROM "users" WHERE "email" =$1`,
+      [email],
+    );
+    const user = result.rows[0];
+
+    if (!user) {
+      return null;
+    }
+    return user;
+  }
+
+
   static async findByEmail(email) {
-    console.log(email);
     const result = await this.client.query(
       `SELECT * FROM ${this.tableName} WHERE "email" =$1`,
       [email],
@@ -49,7 +61,6 @@ export default class UserDatamapper extends CoreDatamapper {
     discord_username,
   }) {
     const saltRound = 10;
-    console.log(password);
     const hashedPassword = await bcrypt.hash(password, saltRound);
     const result = await this.client.query(
       `INSERT INTO ${this.tableName} ("firstname", "lastname", "email", "password", "city", "birth_date", "discord_username") 
@@ -82,6 +93,14 @@ export default class UserDatamapper extends CoreDatamapper {
       [id],
     );
 
+    return rows;
+  }
+  static async updatePassword(newPassword, email) {
+    const result = this.client.query(
+      `UPDATE users SET password = $1 WHERE email = $2`,
+      [newPassword, email],
+    );
+    const { rows } = result;
     return rows;
   }
 }

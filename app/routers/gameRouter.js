@@ -65,6 +65,21 @@ const router = express.Router();
  *   get:
  *     summary: Retourne la liste de tous les jeux
  *     tags: [Games]
+ *     parameters:
+ *       - in: query
+ *         name: itemsByPage
+ *         schema:
+ *           type: integer
+ *           default: 20
+ *         required: false
+ *         description: Nombre d'éléments par page
+ *       - in: query
+ *         name: page
+ *         schema:
+ *           type: integer
+ *           default: 0
+ *         required: false
+ *         description: Numéro de la page
  *     responses:
  *       200:
  *         description: La liste des jeux
@@ -75,6 +90,7 @@ const router = express.Router();
  *               items:
  *                 $ref: '#/components/schemas/Game'
  */
+
 
 
 router.route("/games").get(GameController.getAll.bind(GameController));

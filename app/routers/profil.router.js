@@ -1,6 +1,6 @@
 import express from "express";
 import ProfilController from "../controllers/profil.controller.js";
-
+import authMiddleware from "../middleware/auth.middleware.js";
 import validationMiddleware from "../middleware/validation.middleware.js";
 import { profilSchema } from "../utils/validationSchemas.js";
 const router = express.Router();
@@ -75,6 +75,21 @@ const router = express.Router();
  *   get:
  *     summary: Retourne la liste de tous les profils
  *     tags: [Profils]
+ *     parameters:
+ *       - in: query
+ *         name: itemsByPage
+ *         schema:
+ *           type: integer
+ *           default: 20
+ *         required: false
+ *         description: Nombre d'éléments par page
+ *       - in: query
+ *         name: page
+ *         schema:
+ *           type: integer
+ *           default: 0
+ *         required: false
+ *         description: Numéro de la page
  *     responses:
  *       200:
  *         description: La liste des profils
@@ -103,11 +118,14 @@ const router = express.Router();
  *       400:
  *         description: Erreur de validation
  */
+
 router.route("/profil")
   .get(ProfilController.getAll.bind(ProfilController))
   .post(
-    validationMiddleware(profilSchema),
-    ProfilController.create.bind(ProfilController));
+    authMiddleware.verifyToken, validationMiddleware(profilSchema), ProfilController.create.bind(ProfilController));
+
+router.route("/profil/details/:id")
+  .get(ProfilController.getProfilsByUserId.bind(ProfilController));
 
 /**
  * @swagger
@@ -176,9 +194,9 @@ router.route("/profil")
  */
 router.route("/profil/:id")
   .get(ProfilController.getOne.bind(ProfilController))
-  .put(
-    validationMiddleware(profilSchema),
-    ProfilController.update.bind(ProfilController))
-  .delete(ProfilController.delete.bind(ProfilController));
+  .patch(
+    authMiddleware.verifyToken, validationMiddleware(profilSchema), ProfilController.update.bind(ProfilController))
+  .delete(
+    authMiddleware.verifyToken, ProfilController.delete.bind(ProfilController));
 
 export default router;

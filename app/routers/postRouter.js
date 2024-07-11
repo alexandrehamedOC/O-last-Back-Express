@@ -2,6 +2,7 @@ import express from 'express';
 import PostController from '../controllers/post.controller.js';
 import { postSchema } from '../utils/validationSchemas.js';
 import validationMiddleware from '../middleware/validation.middleware.js';
+import authMiddleware from '../middleware/auth.middleware.js';
 
 const router = express.Router();
 
@@ -87,6 +88,21 @@ const router = express.Router();
  *   get:
  *     summary: Retourne la liste de tous les posts
  *     tags: [Posts]
+ *     parameters:
+ *       - in: query
+ *         name: itemsByPage
+ *         schema:
+ *           type: integer
+ *           default: 20
+ *         required: false
+ *         description: Nombre d'éléments par page
+ *       - in: query
+ *         name: page
+ *         schema:
+ *           type: integer
+ *           default: 0
+ *         required: false
+ *         description: Numéro de la page
  *     responses:
  *       200:
  *         description: La liste des posts
@@ -115,11 +131,11 @@ const router = express.Router();
  *       400:
  *         description: Erreur de validation
  */
+
 router.route('/posts')
-  .get(PostController.getAll.bind(PostController))
+  .get(PostController.showPosts.bind(PostController))
   .post(
-    validationMiddleware(postSchema),
-    PostController.createpost.bind(PostController));
+    authMiddleware.verifyToken, validationMiddleware(postSchema), PostController.createpost.bind(PostController));
 
 /**
  * @swagger
@@ -189,9 +205,9 @@ router.route('/posts')
 router.route('/posts/:id')
   .get(PostController.getOne.bind(PostController))
   .patch(
-    validationMiddleware(postSchema),
-    PostController.update.bind(PostController))
-  .delete(PostController.delete.bind(PostController));
+    authMiddleware.verifyToken, validationMiddleware(postSchema), PostController.update.bind(PostController))
+  .delete(
+    authMiddleware.verifyToken, PostController.delete.bind(PostController));
 
 /**
  * @swagger

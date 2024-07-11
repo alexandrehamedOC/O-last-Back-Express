@@ -5,8 +5,12 @@ export default class CoreDatamapper {
     this.client = config.client;
   }
 
-  static async findAll() {
-    const result = await this.client.query(`SELECT * FROM "${this.tableName}"`);
+  static async findAll(itemsPerPage, currentPage) {
+    const offset = currentPage * itemsPerPage;
+    const result = await this.client.query(
+      `SELECT * FROM "${this.tableName}" ORDER BY id ASC LIMIT $1 OFFSET $2`,
+      [itemsPerPage, offset],
+    );
     const { rows } = result;
     return rows;
   }

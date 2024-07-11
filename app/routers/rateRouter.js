@@ -1,8 +1,8 @@
-import express from 'express';
-import RateController from '../controllers/rate.controller.js';
-import authMiddleware from '../middleware/auth.middleware.js';
-import validationMiddleware from '../middleware/validation.middleware.js';
-import { rateSchema } from '../utils/validationSchemas.js';
+import express from "express";
+import RateController from "../controllers/rate.controller.js";
+import authMiddleware from "../middleware/auth.middleware.js";
+import validationMiddleware from "../middleware/validation.middleware.js";
+import { rateSchema } from "../utils/validationSchemas.js";
 
 const router = express.Router();
 /**
@@ -65,6 +65,21 @@ const router = express.Router();
  *   get:
  *     summary: Retourne la liste de toutes les notes
  *     tags: [Rates]
+ *     parameters:
+ *       - in: query
+ *         name: itemsByPage
+ *         schema:
+ *           type: integer
+ *           default: 20
+ *         required: false
+ *         description: Nombre d'éléments par page
+ *       - in: query
+ *         name: page
+ *         schema:
+ *           type: integer
+ *           default: 0
+ *         required: false
+ *         description: Numéro de la page
  *     responses:
  *       200:
  *         description: La liste des notes
@@ -94,13 +109,14 @@ const router = express.Router();
  *         description: Erreur de validation
  */
 
-router.route('/rates')
+router
+  .route("/rates")
   .get(RateController.getAll.bind(RateController))
   .post(
+    authMiddleware.verifyToken,
     validationMiddleware(rateSchema),
-    RateController.createRate.bind(RateController));
-
-
+    RateController.createRate.bind(RateController),
+  );
 
 /**
  * @swagger
@@ -168,12 +184,18 @@ router.route('/rates')
  *         description: Note non trouvée
  */
 
-router.route('/rates/:id')
+router
+  .route("/rates/:id")
   .get(RateController.getOne.bind(RateController))
   .patch(
+    authMiddleware.verifyToken,
     validationMiddleware(rateSchema),
-    RateController.update.bind(RateController))
-  .delete(authMiddleware.verifyToken, RateController.delete.bind(RateController));
+    RateController.update.bind(RateController),
+  )
+  .delete(
+    authMiddleware.verifyToken,
+    RateController.delete.bind(RateController),
+  );
 
 /**
  * @swagger
@@ -188,6 +210,20 @@ router.route('/rates/:id')
  *           type: integer
  *         required: true
  *         description: L'identifiant de l'utilisateur dont les notes sont récupérées
+ *       - in: query
+ *         name: itemsByPage
+ *         schema:
+ *           type: integer
+ *           default: 10
+ *         required: false
+ *         description: Nombre de notes par page
+ *       - in: query
+ *         name: page
+ *         schema:
+ *           type: integer
+ *           default: 1
+ *         required: false
+ *         description: Numéro de la page des résultats
  *     responses:
  *       200:
  *         description: Liste des notes pour l'utilisateur spécifié
@@ -201,7 +237,8 @@ router.route('/rates/:id')
  *         description: Aucun profil trouvé pour cet utilisateur
  */
 
-router.route('/rates/user/:userId')
+router
+  .route("/rates/user/:userId")
   .get(RateController.getRatesByUser.bind(RateController));
 
 export default router;
