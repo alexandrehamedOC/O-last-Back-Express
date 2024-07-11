@@ -1,6 +1,6 @@
 import express from 'express';
 import PostController from '../controllers/post.controller.js';
-import { postSchema } from '../utils/validationSchemas.js';
+import { postSchema, postSchemaUpdate } from '../utils/validationSchemas.js';
 import validationMiddleware from '../middleware/validation.middleware.js';
 import authMiddleware from '../middleware/auth.middleware.js';
 
@@ -205,7 +205,7 @@ router.route('/posts')
 router.route('/posts/:id')
   .get(PostController.getOne.bind(PostController))
   .patch(
-    authMiddleware.verifyToken, validationMiddleware(postSchema), PostController.update.bind(PostController))
+    authMiddleware.verifyToken, validationMiddleware(postSchemaUpdate), PostController.update.bind(PostController))
   .delete(
     authMiddleware.verifyToken, PostController.delete.bind(PostController));
 

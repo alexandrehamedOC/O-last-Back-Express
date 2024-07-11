@@ -15,6 +15,18 @@ export const userSchema = Joi.object({
   city: Joi.string().required(),
 });
 
+export const userSchemaUpdate = Joi.object({
+  firstname: Joi.string(),
+  lastname: Joi.string(),
+  email: Joi.string().email(),
+  password: Joi.string()
+    .pattern(new RegExp('(?=.*[a-z])(?=.*[A-Z])(?=.*\\d)(?=.*[$@$!%*?&.])[A-Za-z\\d$@$!%*?&.]{8,20}'))
+    .min(8),
+  birth_date: Joi.date().iso(),
+  discord_username: Joi.string(),
+  city: Joi.string(),
+});
+
 
 export const rateSchema = Joi.object({
   note: Joi.number().integer().min(1).max(5).required(),
@@ -52,6 +64,16 @@ export const postSchema = Joi.object({
   status: Joi.boolean().required(),
 });
 
+export const postSchemaUpdate = Joi.object({
+  title: Joi.string(),
+  platform: Joi.string(),
+  description: Joi.string(),
+  schedule_start: Joi.date().iso(),
+  schedule_end: Joi.date().iso(),
+  profil_id: Joi.number().integer(),
+  game_id: Joi.number().integer(),
+  status: Joi.boolean(),
+});
 export const gameSchema = Joi.object({
   name: Joi.string().required(),
   pegi: Joi.number().integer().required(),
