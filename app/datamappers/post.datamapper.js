@@ -26,7 +26,7 @@ export default class PostDatamapper extends CoreDatamapper {
       JOIN "users" ON "profil"."user_id" = "users"."id"
       WHERE "users"."id" =$1
         `,
-      [userId]
+      [userId],
     );
     const { rows } = result;
     return rows;
@@ -56,7 +56,7 @@ export default class PostDatamapper extends CoreDatamapper {
         JOIN "game" ON "${this.tableName}"."game_id" = "game"."id"
         ORDER BY "post_schedule_start" ASC LIMIT $1 OFFSET $2
         `,
-      [itemsPerPage, offset]
+      [itemsPerPage, offset],
     );
     const { rows } = result;
     return rows;

@@ -2,7 +2,7 @@ import express from "express";
 import ProfilController from "../controllers/profil.controller.js";
 import authMiddleware from "../middleware/auth.middleware.js";
 import validationMiddleware from "../middleware/validation.middleware.js";
-import { profilSchema } from "../utils/validationSchemas.js";
+import { profilSchema, profilSchemaUpdate } from "../utils/validationSchemas.js";
 const router = express.Router();
 
 /**
@@ -195,7 +195,7 @@ router.route("/profil/details/:id")
 router.route("/profil/:id")
   .get(ProfilController.getOne.bind(ProfilController))
   .patch(
-    authMiddleware.verifyToken, validationMiddleware(profilSchema), ProfilController.update.bind(ProfilController))
+    authMiddleware.verifyToken, validationMiddleware(profilSchemaUpdate), ProfilController.update.bind(ProfilController))
   .delete(
     authMiddleware.verifyToken, ProfilController.delete.bind(ProfilController));
 

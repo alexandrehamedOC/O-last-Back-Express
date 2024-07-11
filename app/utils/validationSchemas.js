@@ -32,6 +32,15 @@ export const profilSchema = Joi.object({
   user_id: Joi.number().integer().required(),
 });
 
+export const profilSchemaUpdate = Joi.object({
+  name: Joi.string(),
+  description: Joi.string(),
+  rank: Joi.string(),
+  level: Joi.number().integer(),
+  game_id: Joi.number().integer(),
+  user_id: Joi.number().integer(),
+});
+
 export const postSchema = Joi.object({
   title: Joi.string().required(),
   platform: Joi.string().required(),
