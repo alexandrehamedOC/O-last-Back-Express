@@ -19,9 +19,7 @@ export default class UserController extends CoreController {
         return next(new ApiError(`${this.entityName} not found`, 404, 'NOT_FOUND'));
       }
       const userId = result.id;
-      console.log(userId);
       const token = jwt.sign({ email: email, userId: userId }, process.env.TOKEN_SECRET, { expiresIn: '2h' });
-      console.log(token);
       res.cookie('token', token, { httpOnly: true});
       res.json(userId);
     } catch (error) {
@@ -32,7 +30,6 @@ export default class UserController extends CoreController {
 
   static async getUserDetails(req, res, next){
     const {id} = req.params;
-    console.log(id);
     try {
       const details = await UserDatamapper.userDetails(id);
       if(!details){

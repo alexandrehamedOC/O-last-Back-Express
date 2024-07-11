@@ -15,9 +15,11 @@ export default class ProfilDatamapper extends CoreDatamapper {
   	"profil"."rank",
   	"profil"."level",
  	  "game"."name" as "game_name",
-    "game"."id" as "game_id"
+    "game"."id" as "game_id",
+    "profil"."user_id" as "user_id"
   FROM "profil"
   JOIN "game" ON "game"."id" = "profil"."game_id"
+  JOIN "users" ON "users"."id" = "profil"."user_id"
   WHERE "user_id"=$1;
       `,
       [userId],
