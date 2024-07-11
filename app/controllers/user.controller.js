@@ -1,4 +1,4 @@
-import { UserDatamapper } from "../datamappers/index.datamapper.js";
+import { UserDatamapper }   from "../datamappers/index.datamapper.js";
 import { userSchema } from "../utils/validationSchemas.js";
 import CoreController from "./core.controller.js";
 import ApiError from "../errors/api.errors.js";
@@ -97,7 +97,7 @@ export default class UserController extends CoreController {
         to: user.email,
         from: "alexandrehamedoclock@gmail.com",
         subject: "Password Reset OLAST",
-        text: `HELLO mon coco voici ton url pour reset ton password. Attention tu n'as que 2h pour le faire (avec ta tete la)\n\n http://localhost:3000/reset-password/${tokenPassword} \n\n`,
+        text: `HELLO mon coco voici ton url pour reset ton password. Attention tu n'as que 2h pour le faire (avec ta tete la)\n\n ${process.env.SITE_URL}/nouveau-mot-de-passe?token=${tokenPassword} \n\n`,
       };
 
       const testMail = await transporter.sendMail(mailOptions);
@@ -110,31 +110,24 @@ export default class UserController extends CoreController {
     }
   }
   static async submitNewPassword(req, res) {
-    const { token } = req.params;
-    console.log(req.body);
-    const { password } = req.body;
+    const { password, token } = req.body;
     try {
       const decoded = jwt.verify(token, process.env.TOKEN_SECRET);
       const email = decoded.email;
-
+  
       const user = await UserDatamapper.getUserByMail(email);
       if (!user) {
         return res.status(400).send("Token invalid ou utilisateur inconnu");
       }
+      
       const saltRound = 10;
-      console.log(password);
-
-
       const newHashedPassword = await bcrypt.hash(password, saltRound);
-
-      const result = await UserDatamapper.updatePassword(
-        newHashedPassword,
-        email,
-      );
+  
+      const result = await UserDatamapper.updatePassword(newHashedPassword, email);
       if (!result) {
         return res.status(400).send("Erreur lors de la mise à jour du mot de passe");
       }
-      res.status(200).send("mot de passe modifié avec succès");
+      res.status(200).send("Mot de passe modifié avec succès");
     } catch (error) {
       console.log(error);
       res.status(500).send("Error on the server.");

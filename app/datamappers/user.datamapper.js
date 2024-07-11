@@ -96,7 +96,7 @@ export default class UserDatamapper extends CoreDatamapper {
     return rows;
   }
   static async updatePassword(newPassword, email) {
-    const result = this.client.query(
+    const result = await this.client.query(
       `UPDATE users SET password = $1 WHERE email = $2`,
       [newPassword, email],
     );
