@@ -148,17 +148,10 @@ router
 
 /**
  * @swagger
- * /forgot-password/{token}:
+ * /reset-password:
  *   post:
  *     summary: Réinitialise le mot de passe de l'utilisateur
  *     tags: [Users]
- *     parameters:
- *       - in: path
- *         name: token
- *         schema:
- *           type: string
- *         required: true
- *         description: Jeton JWT pour la réinitialisation du mot de passe
  *     requestBody:
  *       required: true
  *       content:
@@ -167,24 +160,47 @@ router
  *             type: object
  *             required:
  *               - password
+ *               - token
  *             properties:
  *               password:
  *                 type: string
  *                 format: password
  *                 description: Le nouveau mot de passe de l'utilisateur
+ *               token:
+ *                 type: string
+ *                 description: Jeton JWT pour la réinitialisation du mot de passe
  *             example:
  *               password: "newpassword123"
+ *               token: "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9..."
  *     responses:
  *       200:
  *         description: Mot de passe réinitialisé avec succès
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: string
+ *               example: "Mot de passe modifié avec succès"
  *       400:
- *         description: Token invalide ou utilisateur inconnu
+ *         description: Token invalide ou utilisateur inconnu, ou erreur lors de la mise à jour du mot de passe
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: string
+ *               examples:
+ *                 invalid_token:
+ *                   value: "Token invalid ou utilisateur inconnu"
+ *                 update_error:
+ *                   value: "Erreur lors de la mise à jour du mot de passe"
  *       500:
  *         description: Erreur serveur
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: string
+ *               example: "Error on the server."
  */
-
 router
-  .route("/forgot-password/:token")
-  .post(UserController.submitNewPassword.bind(UserController));
+.route("/reset-password")
+.post(UserController.submitNewPassword.bind(UserController));
 
 export default router;

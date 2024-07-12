@@ -42,10 +42,20 @@ export default class CoreDatamapper {
   }
 
   static async update(id, input) {
+
     const fieldPlaceholders = Object.keys(input).map(
-      (column, index) => `"${column}" = ($${index + 1}, "${column}")`,
+      (column, index) => `"${column}" = $${index + 1}`,
     );
     const values = Object.values(input);
+
+          console.log(`
+      UPDATE ${this.tableName} SET
+        ${fieldPlaceholders},
+        updated_at = now()
+      WHERE "id" = $${fieldPlaceholders.length + 1}
+      RETURNING *
+      `,
+      [...values, id])
     const result = await this.client.query(
       `
       UPDATE ${this.tableName} SET

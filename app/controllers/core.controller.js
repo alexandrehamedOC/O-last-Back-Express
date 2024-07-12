@@ -68,6 +68,7 @@ export default class CoreController {
         return next(new ApiError("All fields required", 400, "BAD_REQUEST"));
       }
 
+      // to do vérifier si l'élément existe avant de l'update
       const row = await this.mainDatamapper.update(id, input);
       if (!row) {
         return next(
