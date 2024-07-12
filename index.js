@@ -12,7 +12,7 @@ app.use(router);
 
 app.use('/api-docs',swaggerUI.serve, swaggerUI.setup(swaggerSpec));
 
-const PORT = process.env.PORT || 10000;
+const PORT = process.env.PORT || 3000;
 
 httpServer.listen(PORT, () => {
   console.log(`🚀 Server launched at http://localhost:${PORT} 🚀`);
