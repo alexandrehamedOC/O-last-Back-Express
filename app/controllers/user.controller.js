@@ -20,7 +20,7 @@ export default class UserController extends CoreController {
       }
       const userId = result.id;
       const token = jwt.sign({ email: email, userId: userId }, process.env.TOKEN_SECRET, { expiresIn: '2h' });
-      res.cookie('token', token, { httpOnly: true});
+      res.cookie('token', token, { httpOnly: true, secure: true});
       res.json(userId);
     } catch (error) {
       console.error(error);
