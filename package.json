@@ -5,7 +5,7 @@
   "type": "module",
   "main": "index.js",
   "scripts": {
-    "start": "node index.js",
+    "start": "psql -U olast -d olast_3ov0 -f ./app/data/create_tables.sql && psql -U olast -d olast_3ov0 -f ./app/data/seeding.sql && node index.js",
     "docker-start": "sh -c '/wait-for-it.sh db:5432 -- npm start'",
     "dev": "ENV=dev node --watch index.js",
     "db:seeding": "psql -U olast -d olast -f ./app/data/seeding.sql",
