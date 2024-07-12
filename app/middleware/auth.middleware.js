@@ -4,8 +4,9 @@ export default {
 
   // token verification
   verifyToken(req, res, next) {
-    let token = req.headers.cookie
-    token.slice(6);
+    let token = req.headers.cookie;
+
+    token = token.split('=')[1];
     console.log(token);
 
     if (!token) return res.status(403).redirect('/login');
