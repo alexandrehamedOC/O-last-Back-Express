@@ -121,4 +121,6 @@ router.route("/games").get(GameController.getAll.bind(GameController));
  */
 router.route("/games/:id").get(GameController.getOne.bind(GameController));
 
+router.route("/games/:id/posts").get(GameController.getPostsByGame.bind(GameController));
+
 export default router;
