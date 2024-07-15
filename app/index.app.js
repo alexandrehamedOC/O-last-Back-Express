@@ -7,7 +7,7 @@ const app = express();
 
 // Configuration de CORS pour autoriser les requêtes de localhost:5173
 const corsOptions = {
-  origin: ['http://localhost:5173', 'https://o-last-front.vercel.app/'],
+  origin: ['http://localhost:5173', 'https://o-last.onrender.com'],
   credentials: true,
 };
 

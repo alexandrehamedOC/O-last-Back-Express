@@ -5,7 +5,7 @@
   "type": "module",
   "main": "index.js",
   "scripts": {
-    "start": "node index.js",
+    "start": "ENV=prod node index.js",
     "docker-start": "sh -c '/wait-for-it.sh db:5432 -- npm start'",
     "dev": "ENV=dev node --watch index.js",
     "db:seeding": "psql -U olast -d olast -f ./app/data/seeding.sql",
