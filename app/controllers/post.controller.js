@@ -38,7 +38,6 @@ export default class PostController extends CoreController{
   static async showPosts(req, res){
     const { itemsByPage, page } = req.query;
     const game_id = req.query.game_id;
-    console.log('ici', req.query);
 
     const itemsPerPage = Number(itemsByPage) && Number(itemsByPage) > 0 ? Number(itemsByPage) : 50;
     const currentPage = Number(page) && Number(page) >= 0 ? Number(page) : 0;
