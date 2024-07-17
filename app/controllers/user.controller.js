@@ -85,8 +85,8 @@ export default class UserController extends CoreController {
         port: 465,
         secure: true,
         auth: {
-          user: "alexandrehamedoclock@gmail.com",
-          pass: "gjma ppra nrcz qjbc",
+          user: process.env.EMAIL,
+          pass: process.env.EMAIL_PASSWORD,
         },
       });
 
