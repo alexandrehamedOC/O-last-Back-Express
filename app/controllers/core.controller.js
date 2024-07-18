@@ -84,7 +84,6 @@ export default class CoreController {
 
   static async delete(req, res, next) {
     const { id } = req.params;
-    console.log(id);
     try {
       const eltToDelete = await this.mainDatamapper.delete(id);
 
