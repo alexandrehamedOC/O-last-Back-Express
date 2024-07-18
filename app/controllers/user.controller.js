@@ -20,7 +20,7 @@ export default class UserController extends CoreController {
       }
       const userId = result.id;
       const token = jwt.sign({ email: email, userId: userId }, process.env.TOKEN_SECRET, { expiresIn: '2h' });
-      res.cookie('token', token, { httpOnly: true, secure: true});
+      res.cookie('token', token, { httpOnly: true, secure: true, sameSite: 'None'});
       res.json(userId);
     } catch (error) {
       console.error(error);
@@ -111,15 +111,15 @@ export default class UserController extends CoreController {
     try {
       const decoded = jwt.verify(token, process.env.TOKEN_SECRET);
       const email = decoded.email;
-  
+
       const user = await UserDatamapper.getUserByMail(email);
       if (!user) {
         return res.status(400).send("Token invalid ou utilisateur inconnu");
       }
-      
+
       const saltRound = 10;
       const newHashedPassword = await bcrypt.hash(password, saltRound);
-  
+
       const result = await UserDatamapper.updatePassword(newHashedPassword, email);
       if (!result) {
         return res.status(400).send("Erreur lors de la mise à jour du mot de passe");
