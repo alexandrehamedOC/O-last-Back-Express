@@ -1,0 +1,18 @@
+### Test POST request for creating a rate
+POST http://localhost:3000/api/v1/rates/
+Content-Type: application/json
+
+{
+  "rating": 4,
+  "comment": "Great service",
+  "user_id": 1,
+  "game_id": 3
+}
+
+### Test POST request for creating a rate
+GET http://localhost:3000/api/v1/profil/details/2
+Content-Type: application/json  
+
+### Test POST request for creating a rate
+GET http://localhost:3000/api/v1/games
+Content-Type: application/json  

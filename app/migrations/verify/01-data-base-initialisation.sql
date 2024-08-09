@@ -1,0 +1,11 @@
+-- Verify olast:create on pg
+
+BEGIN;
+
+SELECT * FROM "users" WHERE FALSE;
+SELECT * FROM "profil" WHERE FALSE;
+SELECT * FROM "game" WHERE FALSE;
+SELECT * FROM "post" WHERE FALSE;
+SELECT * FROM "rate" WHERE FALSE;
+
+ROLLBACK;

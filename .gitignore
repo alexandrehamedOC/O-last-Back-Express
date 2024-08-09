@@ -1,2 +1,6 @@
 .env
 node_modules
+sqitch.conf
+test.http
+/pgsql
+vercel.json

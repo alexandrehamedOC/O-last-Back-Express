@@ -1,0 +1,4 @@
+%syntax-version=1.0.0
+%project=olast
+
+01-data-base-initialisation 2024-07-01T09:20:02Z jb <jean-baptiste.bayaut@oclock.school> # init bdd

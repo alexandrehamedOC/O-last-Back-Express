@@ -5,19 +5,39 @@
   "type": "module",
   "main": "index.js",
   "scripts": {
-    "dev": "ENV=dev node --watch index.js"
+    "start": "ENV=prod node index.js",
+    "docker-start": "sh -c '/wait-for-it.sh db:5432 -- npm start'",
+    "dev": "ENV=dev node --watch index.js",
+    "db:seeding": "psql -U olast -d olast -f ./app/data/seeding.sql",
+    "db:seeding:jb": "psql -p 5433 -f ./app/data/seeding.sql",
+    "db:seeding:al": "psql -U spedata -d olast -f ./app/data/seeding.sql",
+    "docker:image": "docker build -t o-last-back .",
+    "docker:run": "docker run -p 3000:3000 o-last-back",
+    "test": "node --experimental-vm-modules node_modules/jest/bin/jest.js"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "devDependencies": {
+    "@babel/core": "^7.24.7",
+    "@babel/plugin-transform-modules-commonjs": "^7.24.7",
+    "@babel/preset-env": "^7.24.7",
     "@eslint/js": "^9.5.0",
     "eslint": "^9.5.0",
-    "globals": "^15.6.0"
+    "globals": "^15.6.0",
+    "jest": "^29.7.0"
   },
   "dependencies": {
+    "bcryptjs": "^2.4.3",
+    "cors": "^2.8.5",
     "dotenv": "^16.4.5",
+    "eslint-plugin-jest": "^28.6.0",
     "express": "^4.19.2",
-    "pg": "^8.12.0"
+    "joi": "^17.13.3",
+    "jsonwebtoken": "^9.0.2",
+    "nodemailer": "^6.9.14",
+    "pg": "^8.12.0",
+    "swagger-jsdoc": "^6.2.8",
+    "swagger-ui-express": "^5.0.1"
   }
 }
